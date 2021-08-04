@@ -1,0 +1,51 @@
+@layout('layouts/default')
+@set('title', 'پنل کاربری')
+
+@section('body')
+    <!-- start main section --><!-- start main section -->
+    <div class="mb-5">
+      <div class="container min-80">
+        <div class="row d-flex justify-content-lg-around gap-5 gap-lg-0">
+          <!-- start aside section -->
+          <section class="col-lg-3 col-md-6 col-sm-7 col-11 p-3 mx-auto">
+            <aside class="w-100">
+              <div class="w-100 p-4 aside_container f-14">
+                <h6 class="fw-bold">توجه</h6>
+                <p class="fw-light mt-3">
+                  شرکت ها با شما برای هماهنگی بیشتر و علت قبول یا رد تماس میگیرند، لطفا از تماس با واحد وبسایت ما خودداری نمایید
+                </p>
+              </div>
+            </aside>
+          </section>
+          <!-- end aside section -->
+          <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
+            <div
+              class="
+                w-100
+                item
+                d-flex
+                flex-lg-row flex-column
+                justify-content-center justify-content-lg-between
+                align-items-center
+                position-relative
+                py-3
+              "
+            >
+              <div class="red-right-box position-absolute h-100 start-0"></div>
+              <div class="h-100 py-4 ps-lg-5 w-65 d-flex flex-column flex-lg-row text-lg-start text-center gap-4 align-items-center">
+                <img src="./images/item_img.webp" alt="logo" />
+                <div>
+                  <h6>کارآموز طراحی وب (Front-end)</h6>
+                  <p class="fw-light mt-4">وضعیت: مشخص نشده</p>
+                </div>
+              </div>
+              <div class="pe-lg-5 pb-3 py-lg-0">
+                <div class="gradiant d align-items-center justify-content-center item_btn px-lg-3 px-2 py-3 text-white">فرستاده شده</div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <!-- end main section -->
+@end

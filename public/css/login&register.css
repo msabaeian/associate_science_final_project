@@ -1,0 +1,99 @@
+@import url(./fonts.css);
+:root {
+  --light-gray: #a4a4a4;
+  --dark-gray: #3f4958;
+}
+body {
+  background-color: var(--dark-gray);
+  font-family: iranyekan !important;
+  padding: 4rem 0;
+}
+.cursor-pointer{
+  cursor: pointer;
+}
+.title {
+  font-weight: bold;
+  background-clip: text;
+  background-image: linear-gradient(70deg, #f44e78 3%, #ed6d4b 98%);
+  -webkit-text-fill-color: transparent;
+  -ms-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+  font-size: 45px;
+  user-select: none;
+}
+.main_card {
+  border-radius: 16px;
+  padding-top: 32px;
+}
+.main_card p {
+  color: var(--light-gray);
+  margin-bottom: 35px;
+}
+.main_card a {
+  color: var(--dark-gray);
+}
+.main_card .form-floating {
+  color: var(--light-gray);
+}
+.main_card .form-floating input {
+  line-height: 75px;
+  height: 75px;
+  border-radius: 8px;
+  border: 1px solid var(--light-gray);
+}
+.upload_logo {
+  line-height: 75px;
+  height: 75px;
+  border-radius: 8px;
+  border: 1px solid var(--light-gray);
+  color: var(--light-gray);
+  display: flex;
+  align-items: center;
+}
+.upload_logo div {
+  width: 48px;
+  height: 48px;
+  margin-right: auto;
+  border-radius: 8px;
+  border: solid 1px #c7c7c7;
+  /* background-image: url("https://randomuser.me/api/portraits/men/75.jpg"); */
+  background: #ccc;
+  background-size: contain;
+}
+
+.main_card .form-floating input:focus {
+  box-shadow: none !important;
+}
+
+.main_card .form-floating label {
+  line-height: 75px;
+}
+
+.form_btn {
+  height: 56px;
+  border-radius: 8px;
+  background: linear-gradient(83deg, #f44e78 0%, #ed6d4b 100%);
+}
+.form_btn button {
+  font-size: 18px;
+  font-weight: 500;
+}
+.my_alert {
+  background-color: #c2e7ff;
+  border-radius: 8px;
+  border: solid 1px #83cfff;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--dark-gray);
+}
+.my_alert a {
+  color: #141414 !important;
+  font-weight: bold;
+}
+.btn_shadow {
+  transition: all 0.3s;
+}
+.btn_shadow:hover {
+  box-shadow: 0 0 10px 1px #ba523657 !important;
+  transition: all 0.3s;
+}
