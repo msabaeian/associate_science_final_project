@@ -22,22 +22,25 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.get('/', ({ view }) => view.render('home'))
 
-Route.get('/login', ({ view }) => view.render('login'))
+Route.group(() => {
+  Route.get('/login', 'AuthController.loginShow')
+  Route.get('/register', 'AuthController.studentRegister')
+  Route.get('/registerCompany', 'AuthController.companyRegister')
+  Route.post('/login', 'AuthController.login')
+  Route.post('/register', 'AuthController.studentStore')
+  Route.post('/registerCompany', 'AuthController.companyStore')
+}).middleware('guest')
 
-Route.get('/register', ({ view }) => view.render('register'))
-
-Route.get('/registerCompany', ({ view }) => view.render('register_company'))
+Route.get('/logout', 'AuthController.logout')
 
 Route.get('/positions', ({ view }) => view.render('position_list'))
 Route.get('/position/:id', ({ view }) => view.render('position'))
-
 Route.get('/about', ({ view }) => view.render('about_us'))
 
-Route.get('/usercp', ({ view }) => view.render('user_dashboard'))
 
-
+Route.get('/usercp', ({ view }) => view.render('user_dashboard')).middleware('auth')
 Route.group(() => {
   Route.get('/positions', ({ view }) =>  view.render('company_positions'))
   Route.get('/position/:id', ({ view }) => view.render('company_position'))
   
-}).prefix('/company')
+}).prefix('/company').middleware('auth')

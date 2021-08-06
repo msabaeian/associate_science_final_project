@@ -1,20 +1,25 @@
 @layout('layouts/loginRegister')
 @set('title', 'ورود')
 
+
 @section('body')
-<div class="w-100 h-100 px-md-4">
-  <div class="form-floating mb-4">
-    <input type="email" class="form-control" id="email" placeholder="name@example.com" />
-    <label for="floatingInput" class="py-0 px-4">نام کاربری یا ایمیل</label>
+<form class="w-100 d-flex flex-column justify-content-center align-items-center" action="{{ route('AuthController.login') }}" method="POST">
+  {{ csrfField() }}
+  <div class="w-100 h-100 px-md-4">
+    <div class="form-floating mb-4">
+      <input type="email" class="form-control" id="email" placeholder="name@example.com" name="email" />
+      <label for="floatingInput" class="py-0 px-4">نام کاربری یا ایمیل</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="Password" placeholder="Password" name="password" />
+      <label for="floatingPassword" class="py-0 px-4">کلمه عبور</label>
+    </div>
   </div>
-  <div class="form-floating">
-    <input type="password" class="form-control" id="Password" placeholder="Password" />
-    <label for="floatingPassword" class="py-0 px-4">کلمه عبور</label>
+  <div class="form_btn d-flex mt-5 col-9 col-md-8 col-xl-7 btn_shadow">
+    <button type="submit" class="btn w-100 h-100 text-light">ورود</button>
   </div>
-</div>
-<div class="form_btn d-flex mt-5 col-9 col-md-8 col-xl-7 btn_shadow">
-  <button type="button" class="btn w-100 h-100 text-light">ورود</button>
-</div>
+  
+</form>
 <p class="text-center mt-5">
   حساب کاربری ندارید؟ همین الان
   <a href="/register" class="text-decoration-none">ثبت نام </a>کنید

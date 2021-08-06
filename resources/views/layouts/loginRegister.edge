@@ -12,9 +12,11 @@
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center min-vh-100">
             <div class="col-12 col-xl-6 col-md-8 d-flex justify-content-center align-items-center bg-white flex-column px-4 main_card">
+                @include('partials/error')
                 <header class="mb-5 pt-2">
                     <a href="/" class="text-decoration-none"><h1 class="title ms-3">کارآموز</h1></a>
                 </header>
+                
                 @!section('body')
             </div>
         </div>

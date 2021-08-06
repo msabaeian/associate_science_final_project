@@ -2,32 +2,61 @@
 <div class="container pt-2 pb-5">
     <nav class="navbar navbar-expand-lg navbar-light py-4 d-flex align-items-center justify-content-start">
         <a href="/" class="text-decoration-none"><h1 class="title ms-3">کارآموز</h1></a>
+        @if(auth.isLoggedIn)
+          <div class="col-lg-1 nav_btn gradiant d-lg-flex align-items-center justify-content-center order-last text-center d-none">
+            <a class="btn f-14 d-block w-100 btn_shadow" href="/logout" role="button">خروج</a>
+          </div>
+        @else
         <div class="col-lg-2 nav_btn gradiant d-lg-flex align-items-center justify-content-center order-last d-none btn_shadow">
-        <a class="btn d-block w-100" href="/login" role="button">ثبت‌نام / ورود</a>
+          <a class="btn d-block w-100" href="/login" role="button">ثبت‌نام / ورود</a>
         </div>
+        @end
 
         <button class="navbar-toggler order-first" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
-        <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navmenu">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
-            <li class="nav-item px-3 ps-lg-5">
-            <a class="nav-link" href="/">صفحه نخست</a>
-            </li>
-            <li class="nav-item px-3">
-            <a class="nav-link" href="/positions">فرصت‌های کارآموزی</a>
-            </li>
-            <li class="nav-item px-3">
-            <a class="nav-link" href="about">درباره ما</a>
-            </li>
-            <li class="nav-item px-3 d-lg-none">
-            <a class="nav-link" href="/login">ورود</a>
-            </li>
-            <li class="nav-item px-3 d-lg-none">
-            <a class="nav-link" href="/register">ثبت نام</a>
-            </li>
-        </ul>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
+            @if(auth.isLoggedIn)
+              <li class="nav-item px-3 ps-lg-5">
+                <p class="nav-link fw-bold" href="#">
+                  @if(auth.user.role === 2)
+                    {{auth.user.name}} عزیز
+                  @else
+                    شرکت {{auth.user.name}}
+                  @end
+                </p>
+              </li>
+
+              @if(auth.user.role === 2)
+                <li class="nav-item px-3">
+                  <a class="nav-link" href="/usercp">درخواست های شما</a>
+                </li>
+              @else
+                <li class="nav-item px-3">
+                  <a class="nav-link" href="/company/positions">فرصت‌های کارآموزی شما</a>
+                </li>
+              @end
+              
+            @else
+              <li class="nav-item px-3 ps-lg-5">
+                <a class="nav-link" href="/">صفحه نخست</a>
+              </li>
+              <li class="nav-item px-3">
+                <a class="nav-link" href="/positions">فرصت‌های کارآموزی</a>
+              </li>
+              <li class="nav-item px-3">
+                <a class="nav-link" href="about">درباره ما</a>
+              </li>
+              <li class="nav-item px-3 d-lg-none">
+                <a class="nav-link" href="/login">ورود</a>
+              </li>
+              <li class="nav-item px-3 d-lg-none">
+                <a class="nav-link" href="/register">ثبت نام</a>
+              </li>
+            @end
+          </ul>
         </div>
     </nav>
 </div>
