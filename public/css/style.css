@@ -267,6 +267,9 @@ img {
   .item {
     background-color: #fcfcfc;
   }
+  .item .item_btn {
+    opacity: 1;
+  }
   .item:hover {
     background-color: #f4f4f4;
   }

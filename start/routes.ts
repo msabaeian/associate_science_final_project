@@ -40,7 +40,9 @@ Route.get('/about', ({ view }) => view.render('about_us'))
 
 Route.get('/usercp', ({ view }) => view.render('user_dashboard')).middleware('auth')
 Route.group(() => {
-  Route.get('/positions', ({ view }) =>  view.render('company_positions'))
-  Route.get('/position/:id', ({ view }) => view.render('company_position'))
+  Route.get('/positions', 'CompaniesController.all')
+  Route.get('/position/create', 'CompaniesController.createShow')
+  Route.post('/position/create', 'CompaniesController.store')
+  Route.get('/position/:id', 'CompaniesController.index')
   
 }).prefix('/company').middleware('auth')

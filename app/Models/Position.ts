@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 import Apply from './Apply'
 
@@ -8,10 +8,10 @@ export default class Position extends BaseModel {
   public id: number
 
   @column()
-  public company_id: number
+  public companyId: number
 
   @column()
-  public student_id: number | null
+  public studentId: number | null
 
   @column()
   public type: number
@@ -29,15 +29,17 @@ export default class Position extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => User , {
-    localKey: 'company_id'
+    localKey: 'companyId'
   })
   public company: BelongsTo<typeof User>
 
   @belongsTo(() => User, {
-    localKey: 'student_id'
+    localKey: 'studentId'
   })
   public student: BelongsTo<typeof User>
 
-  @manyToMany(() => Apply)
-  public students: ManyToMany<typeof Apply>
+  @hasMany(() => Apply, {
+    foreignKey: 'positionId'
+  })
+  public students: HasMany<typeof Apply>
 }

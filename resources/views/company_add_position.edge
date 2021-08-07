@@ -1,0 +1,61 @@
+@layout('layouts/default')
+@set('title', 'وضعیت موقعیت کارآموزی')
+
+@section('body')
+    <div class="mb-5">
+      <div class="container min-80">
+        <div class="row d-flex flex-column flex-lg-row justify-content-center gap-lg-0 gap-4 justify-content-lg-around">
+          <!-- start aside section -->
+          <section class="col-lg-3 col-md-6 col-sm-7 col-11 p-3 mx-auto">
+            <aside class="w-100">
+              <div class="w-100 p-4 aside_container f-14">
+                <h6 class="fw-bold">توجه</h6>
+                <p class="fw-light mt-3">
+هرچه اطلاعات موقعیت کارآموزی کامل تر باشد توجه افراد بیشتر و بهتری را به خود جذب میکند.
+                </p>
+              </div>
+            </aside>
+          </section>
+          <!-- end aside section -->
+          <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
+            <div>
+
+              <form action="{{ route('CompaniesController.store') }}" method="POST" enctype="multipart/form-data">
+                {{ csrfField() }}
+                <div class="row w-100 py-3 g-4">
+                  <div class="mb-1">
+                    <label for="title" class="form-label">عنوان موقعیت شغلی</label>
+                    <input name="title" class="form-control form-control-lg" id="title" placeholder="مثال: کارآموز طراح وب">
+                  </div>
+                  <div class="mb-1">
+                    <label for="description" class="form-label">شرح موقعیت کارآموزی</label>
+                    <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+                  </div>
+
+                  <div class="mb-1">
+                    <p class="form-label">دسته بندی</p>
+                    @each(type in position_types)
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" value={{type.id}} name="type" id="type{{type.id}}">
+                        <label class="form-check-label" for="type{{type.id}}">
+                          {{type.name}}
+                        </label>
+                      </div>
+                    @endeach
+                  </div>
+
+
+                  <div class="col-lg-4 nav_btn gradiant d-lg-flex align-items-center justify-content-center order-last text-center">
+                    <button type="submit" class="btn f-14 d-block w-100 btn_shadow text-white">ثبت موقعیت کارآموزی</button>
+                  </div>
+                  
+                </div>
+              </form>
+              
+              @include('partials/error')
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+@end
