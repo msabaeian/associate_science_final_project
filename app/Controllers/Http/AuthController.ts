@@ -1,6 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
-import Hash from '@ioc:Adonis/Core/Hash'
 import {schema,rules,ParsedTypedSchema} from '@ioc:Adonis/Core/Validator'
 import { uploadToLiaraBucket } from 'App/Helpers/UploadToLiara'
 import UserRole from 'Contracts/Enums/UserROle'
@@ -31,7 +30,6 @@ export default class UsersController {
     }
 
     public async registerUser(ctx: HttpContextContract, validationSchema: ParsedTypedSchema<any>, userRole: UserRole = UserRole.STUDENT) {
-        console.log("here")
         const validate = await ctx.request.validate({ 
             schema: validationSchema
         }) 
