@@ -1,6 +1,13 @@
 @layout('layouts/loginRegister')
 @set('title', 'ثبت نام')
 @section('body')
+<div class="w-100 h-100 px-md-3 mb-4">
+  <div class="alert my_alert w-100" role="alert">
+    اگر قصد ثبت‌نام به عنوان شرکت و اعلام ظرفیت دارید، از طریق این
+    <a href="{{route('AuthController.companyRegister')}}" class="text-decoration-none">این صفحه</a>
+    اقدام نمایید
+  </div>
+</div>
 <form class="w-100 d-flex flex-column justify-content-center align-items-center" action="{{ route('AuthController.studentStore') }}" method="POST" enctype="multipart/form-data">
   {{ csrfField() }}
   <div class="w-100 h-100 px-md-3">
@@ -26,7 +33,7 @@
     </div>
     <!-- image -->
     <div class="upload_logo d-flex align-items-center pe-3 cursor-pointer">
-      <input name="image" type="file" class="form-control upload_logo_input" id="logo" placeholder="logo" hidden accept="image/*"/>
+      <input name="image" type="file" class="form-control upload_logo_input" id="logo" placeholder="logo" hidden accept="image/jpg,image/png"/>
       <label for="floatingInput" class="py-0 px-4 cursor-pointer is-invalid">تصویر کاربری</label>
       <div class="logo_preview">
         <!-- background image -->
