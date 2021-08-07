@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 import Apply from './Apply'
+import PositionSex from 'Contracts/Enums/PositionSex'
 
 export default class Position extends BaseModel {
   @column({ isPrimary: true })
@@ -15,6 +16,9 @@ export default class Position extends BaseModel {
 
   @column()
   public type: number
+
+  @column()
+  public sex: PositionSex
 
   @column()
   public title: string
