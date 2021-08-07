@@ -33,8 +33,8 @@ Route.group(() => {
 
 Route.get('/logout', 'AuthController.logout')
 
-Route.get('/positions', ({ view }) => view.render('position_list'))
-Route.get('/position/:id', ({ view }) => view.render('position'))
+Route.get('/positions', 'PositionsController.all')
+Route.get('/position/:id', 'PositionsController.index')
 
 Route.get('/about', ({ view }) => view.render('about_us'))
 

@@ -9,69 +9,71 @@
       <!-- start aside section -->
       <section class="col-lg-3 col-md-6 col-sm-7 col-11 p-3 mx-auto">
         <aside class="w-100">
-          <div class="w-100 p-4 aside_container">
-            <h6>جست و جو بر اساس</h6>
-            <form class="d-flex mt-4 mb-5">
-              <input class="form-control p-3" type="search" placeholder="عنوان شغلی، مهارت و …" />
-            </form>
-            <h6 class="mb-3">بر اساس جنسیت</h6>
-            <div class="fw-light">
-              <label for="all_gender" class="radio_btn my-2 py-1">
-                <input type="radio" name="gender" id="all_gender" class="radio_input" checked />
-                <div class="radio_radio d-inline-block me-2"></div>
-                نمایش همه
-              </label>
-            </div>
-            <div class="fw-light radio_div">
-              <label for="mens" class="radio_btn my-2 py-1">
-                <input type="radio" name="gender" id="mens" class="radio_input" />
-                <div class="radio_radio d-inline-block me-2"></div>
-                فقط آقایان
-              </label>
-            </div>
-            <div class="fw-light">
-              <label for="womens" class="radio_btn my-2 py-1">
-                <input type="radio" name="gender" id="womens" class="radio_input" />
-                <div class="radio_radio d-inline-block me-2"></div>
-                فقط بانوان
-              </label>
-            </div>
-            <!--  -->
-            <h6 class="mb-3 mt-4">بر اساس رشته</h6>
-            <div class="fw-light hos">
-              <label for="all_major" class="radio_btn my-2 py-1">
-                <input type="radio" name="Major" id="all_major" class="radio_input" checked />
-                <div class="radio_radio d-inline-block me-2"></div>
-                نمایش همه
-              </label>
-            </div>
-            <div class="fw-light radio_div">
-              <label for="camputer" class="radio_btn my-2 py-1">
-                <input type="radio" name="Major" id="camputer" class="radio_input" />
-                <div class="radio_radio d-inline-block me-2"></div>
-                کامپیوتر
-              </label>
-            </div>
-            <div class="fw-light">
-              <label for="elec" class="radio_btn my-2 py-1">
-                <input type="radio" name="Major" id="elec" class="radio_input" />
-                <div class="radio_radio d-inline-block me-2"></div>
-                برق
-              </label>
-            </div>
-            <div class="fw-light">
-              <label for="math" class="radio_btn my-2 py-1">
-                <input type="radio" name="Major" id="math" class="radio_input" />
-                <div class="radio_radio d-inline-block me-2"></div>
-                ریاضی
-              </label>
-            </div>
-            <div class="w-75">
-              <div class="gradiant text-center px-0 w-50 mt-4 py-1 btn_shadow">
-                <button class="btn text-white text-center px-xl-3" href="#" role="button">اعمال</button>
+          <form action="{{ route('PositionsController.all') }}" method="GET">
+            <div class="w-100 p-4 aside_container">
+              <h6>جست و جو بر اساس</h6>
+              <div class="d-flex mt-4 mb-5">
+                <input name="search" class="form-control p-3" type="search" placeholder="عنوان شغلی، مهارت و …" />
+              </div>
+              <h6 class="mb-3">بر اساس جنسیت</h6>
+              <div class="fw-light">
+                <label for="all_gender" class="radio_btn my-2 py-1">
+                  <input name="sex" value="1" type="radio" name="gender" id="all_gender" class="radio_input" checked />
+                  <div class="radio_radio d-inline-block me-2"></div>
+                  نمایش همه
+                </label>
+              </div>
+              <div class="fw-light radio_div">
+                <label for="mens" class="radio_btn my-2 py-1">
+                  <input name="sex" value="2" type="radio" name="gender" id="mens" class="radio_input" />
+                  <div class="radio_radio d-inline-block me-2"></div>
+                  فقط آقایان
+                </label>
+              </div>
+              <div class="fw-light">
+                <label for="womens" class="radio_btn my-2 py-1">
+                  <input name="sex" value="3" type="radio" name="gender" id="womens" class="radio_input" />
+                  <div class="radio_radio d-inline-block me-2"></div>
+                  فقط بانوان
+                </label>
+              </div>
+              <!--  -->
+              <h6 class="mb-3 mt-4">بر اساس رشته</h6>
+              <div class="fw-light hos">
+                <label for="all_major" class="radio_btn my-2 py-1">
+                  <input type="radio" name="Major" id="all_major" class="radio_input" checked />
+                  <div class="radio_radio d-inline-block me-2"></div>
+                  نمایش همه
+                </label>
+              </div>
+              <div class="fw-light radio_div">
+                <label for="camputer" class="radio_btn my-2 py-1">
+                  <input type="radio" name="Major" id="camputer" class="radio_input" />
+                  <div class="radio_radio d-inline-block me-2"></div>
+                  کامپیوتر
+                </label>
+              </div>
+              <div class="fw-light">
+                <label for="elec" class="radio_btn my-2 py-1">
+                  <input type="radio" name="Major" id="elec" class="radio_input" />
+                  <div class="radio_radio d-inline-block me-2"></div>
+                  برق
+                </label>
+              </div>
+              <div class="fw-light">
+                <label for="math" class="radio_btn my-2 py-1">
+                  <input type="radio" name="Major" id="math" class="radio_input" />
+                  <div class="radio_radio d-inline-block me-2"></div>
+                  ریاضی
+                </label>
+              </div>
+              <div class="w-75">
+                <div class="gradiant text-center px-0 w-50 mt-4 py-1 btn_shadow">
+                  <button class="btn text-white text-center px-xl-3" href="#" role="button">اعمال</button>
+                </div>
               </div>
             </div>
-          </div>
+          </form>
         </aside>
         <!-- advertise -->
         <div class="mt-5 w-100">
@@ -83,90 +85,25 @@
       <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
         <p class="mb-5 pb-4 fs-6 lean">۱۲۵۰ موقعیت کارآموزی با توجه به جستجوی شما یافت شد</p>
         <div class="list_items">
-          <div
-            class="
-              w-100
-              h-100
-              item
-              d-flex
-              flex-lg-row flex-column
-              justify-content-center justify-content-lg-between
-              align-items-center
-              position-relative
-              mb-5
-            "
-          >
-            <div class="red-right-box position-absolute h-100 start-0"></div>
-            <div class="h-100 py-4 px-5 w-65 d-flex flex-column flex-lg-row text-lg-start text-center gap-4 align-items-center">
-              <img src="./images/item_img.webp" alt="logo" />
-              <div>
-                <h6>کارآموز طراحی وب (Front-end)</h6>
-                <p class="fw-light mt-4">پیام آوا پردازش | Payam Ava Pardazesh</p>
-                <p class="fw-light">سهروردی شمالی، نبش کوچه سعدی، پلاک ۳۲</p>
+          @each(position in positions)
+            <div class="w-100 h-100 item d-flex flex-lg-row flex-column justify-content-center justify-content-lg-between align-items-center position-relative mb-5">
+              <div class="red-right-box position-absolute h-100 start-0"></div>
+              <div class="h-100 py-4 px-5 w-65 d-flex flex-column flex-lg-row text-lg-start text-center gap-4 align-items-center">
+                <img src="./images/item_img.webp" alt="logo" />
+                <div>
+                  <h6>{{position.title}}</h6>
+                  {{--  <p class="fw-light mt-4">{{position.name}}</p>
+                  <p class="fw-light">{{position.address}}</p>  --}}
+                </div>
+              </div>
+              <div class="pe-lg-5 pb-3 py-lg-0">
+                <div class="gradiant align-items-center justify-content-center item_btn px-lg-3 px-0 py-1 btn_shadow">
+                  <a class="btn text-white" href="{{route('PositionsController.index', { id: position.id })}}" role="button">ارسال رزومه</a>
+                </div>
               </div>
             </div>
-            <div class="pe-lg-5 pb-3 py-lg-0">
-              <div class="gradiant align-items-center justify-content-center item_btn px-lg-3 px-0 py-1 btn_shadow">
-                <a class="btn text-white" href="#" role="button">ارسال رزومه</a>
-              </div>
-            </div>
-          </div>
-          <div
-            class="
-              w-100
-              h-100
-              item
-              d-flex
-              flex-lg-row flex-column
-              justify-content-center justify-content-lg-between
-              align-items-center
-              position-relative
-              mb-5
-            "
-          >
-            <div class="red-right-box position-absolute h-100 start-0"></div>
-            <div class="h-100 py-4 w-65 px-5 d-flex flex-column flex-lg-row text-lg-start text-center gap-4 align-items-center">
-              <img src="./images/item_img-2.png" alt="logo" />
-              <div>
-                <h6>کارآموز PHP</h6>
-                <p class="fw-light mt-4">راهبران فناوری اطلاعات | Rahbaran IT</p>
-                <p class="fw-light">سهروردی شمالی، نبش کوچه سعدی، پلاک ۳۲</p>
-              </div>
-            </div>
-            <div class="pe-lg-5 pb-3 py-lg-0">
-              <div class="gradiant align-items-center justify-content-center item_btn px-lg-3 px-0 py-1 btn_shadow">
-                <a class="btn text-white" href="#" role="button">ارسال رزومه</a>
-              </div>
-            </div>
-          </div>
-          <div
-            class="
-              w-100
-              h-100
-              item
-              d-flex
-              flex-lg-row flex-column
-              justify-content-center justify-content-lg-between
-              align-items-center
-              position-relative
-              mb-5
-            "
-          >
-            <div class="red-right-box position-absolute h-100 start-0"></div>
-            <div class="h-100 py-4 px-5 d-flex w-65 flex-column flex-lg-row text-lg-start text-center gap-4 align-items-center">
-              <img src="./images/item_img.webp" alt="logo" />
-              <div>
-                <h6>کارآموز طراحی وب (Front-end)</h6>
-                <p class="fw-light mt-4">پیام آوا پردازش | Payam Ava Pardazesh</p>
-                <p class="fw-light">سهروردی شمالی، نبش کوچه سعدی، پلاک ۳۲</p>
-              </div>
-            </div>
-            <div class="pe-lg-5 pb-3 py-lg-0">
-              <div class="gradiant align-items-center justify-content-center item_btn px-lg-3 px-0 py-1 btn_shadow">
-                <a class="btn text-white" href="#" role="button">ارسال رزومه</a>
-              </div>
-            </div>
-          </div>
+          @endeach
+
         </div>
         <!-- next and previous buttons -->
         <div class="mt-5 mx-auto">

@@ -33,6 +33,28 @@
                   </div>
 
                   <div class="mb-1">
+                    <p class="form-label">جنسیت</p>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" value="1" name="sex" id="both" checked>
+                      <label class="form-check-label" for="both">
+                        خانم و آقا
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" value="2" name="sex" id="male">
+                      <label class="form-check-label" for="male">
+                        آقا
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" value="3" name="sex" id="female">
+                      <label class="form-check-label" for="female">
+                        خانم
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="mb-1">
                     <p class="form-label">دسته بندی</p>
                     @each(type in position_types)
                       <div class="form-check">
