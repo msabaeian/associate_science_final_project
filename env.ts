@@ -29,4 +29,8 @@ export default Env.rules({
 	MYSQL_USER: Env.schema.string(),
 	MYSQL_PASSWORD: Env.schema.string.optional(),
 	MYSQL_DB_NAME: Env.schema.string(),
+	LIARA_ACCESS_KEY: Env.schema.string(),
+	LIARA_SECRET_KEY: Env.schema.string(),
+	LIARA_ENDPOINT: Env.schema.string(),
+	LIARA_BUCKET: Env.schema.string(),
 })

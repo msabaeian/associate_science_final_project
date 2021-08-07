@@ -19,7 +19,7 @@
     <input type="address" class="form-control" id="address" placeholder="address" />
     <label for="floatingInput" class="py-0 px-4">آدرس</label>
   </div>
-  <!--upload logo -->
+  <!-- image -->
   <div class="upload_logo mb-4 d-flex align-items-center pe-3 cursor-pointer">
     <input type="file" class="form-control upload_logo_input" id="logo" placeholder="logo" name="logo" hidden accept="image/*"/>
     <label for="floatingInput" class="py-0 px-4 cursor-pointer">هویت بصری شرکت</label>
@@ -27,7 +27,7 @@
       <!-- background image -->
     </div>
   </div>
-  <!-- end uload logo -->
+  <!-- end image -->
   <div class="form-floating mb-4">
     <input type="password" class="form-control" id="Password" placeholder="Password" />
     <label for="floatingPassword" class="py-0 px-4">کلمه عبور</label>
@@ -45,20 +45,4 @@
   <a href="./signup.html" class="text-decoration-none"> وارد </a>شوید
 </p>
 
-<script defer>
-  document.querySelector('.upload_logo').onclick = function(){
-    document.querySelector('.upload_logo_input').click()
-  }
-  
-  const imageInput = document.querySelector('.upload_logo_input')
-  const imagePreview = document.querySelector('.logo_preview')
-  imageInput.onchange = function(e){
-    const [file] = imageInput.files
-    if (file) {
-      const src = URL.createObjectURL(file)
-      imagePreview.style.backgroundImage = "url("+src+")"
-    }
-  }
-
-</script>
 @end

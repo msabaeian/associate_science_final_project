@@ -2,7 +2,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
 import Hash from '@ioc:Adonis/Core/Hash'
 import {schema,rules} from '@ioc:Adonis/Core/Validator'
-
+import { uploadToLiaraBucket } from 'App/Helpers/UploadToLiara'
 export default class UsersController {
 
     public loginShow(ctx: HttpContextContract){
@@ -26,15 +26,43 @@ export default class UsersController {
     }
 
     public studentRegister(ctx: HttpContextContract){
-        
+        return ctx.view.render('register')
     }
 
     public async studentStore(ctx: HttpContextContract){
         
+        const validationSchema = schema.create({
+            email: schema.string({trim: true}, [
+                rules.email(),
+                rules.unique({table: 'users', column: 'email'})
+            ]),
+            password: schema.string({}, [
+                rules.confirmed()
+            ]),
+            phone: schema.string(),
+            image: schema.file({
+                extnames: ['jpg', 'png']
+            }),
+            name: schema.string(),
+
+        })
+
+        const validate = await ctx.request.validate({ 
+            schema: validationSchema
+        })     
+        
+        const imageUrl = await uploadToLiaraBucket(validate.image)
+
+        await User.create({
+            ...validate,
+            image: imageUrl
+        })
+
+        return this.login(ctx)
     }
 
     public async companyRegister(ctx: HttpContextContract){
-        
+        return ctx.view.render('register_company')
     }
 
     public async companyStore(ctx: HttpContextContract){

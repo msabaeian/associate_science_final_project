@@ -35,8 +35,8 @@ Route.get('/logout', 'AuthController.logout')
 
 Route.get('/positions', ({ view }) => view.render('position_list'))
 Route.get('/position/:id', ({ view }) => view.render('position'))
-Route.get('/about', ({ view }) => view.render('about_us'))
 
+Route.get('/about', ({ view }) => view.render('about_us'))
 
 Route.get('/usercp', ({ view }) => view.render('user_dashboard')).middleware('auth')
 Route.group(() => {

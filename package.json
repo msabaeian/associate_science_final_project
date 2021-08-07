@@ -23,6 +23,7 @@
     "@adonisjs/session": "^6.0.0",
     "@adonisjs/shield": "^7.0.5",
     "@adonisjs/view": "^6.0.0",
+    "aws-sdk": "^2.963.0",
     "luxon": "^2.0.1",
     "mysql": "^2.18.1",
     "phc-bcrypt": "^1.0.7",
