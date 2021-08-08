@@ -24,6 +24,7 @@ export default class CompaniesController {
             title: schema.string(),
             description: schema.string(),
             type: schema.number(),
+            sex: schema.number(),
         })
 
         const validate = await ctx.request.validate({ 

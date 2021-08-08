@@ -33,17 +33,17 @@ export default class Position extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => User , {
-    localKey: 'companyId'
+    foreignKey: 'companyId'
   })
   public company: BelongsTo<typeof User>
 
   @belongsTo(() => User, {
-    localKey: 'studentId'
+    foreignKey: 'studentId'
   })
   public student: BelongsTo<typeof User>
 
   @hasMany(() => Apply, {
-    foreignKey: 'positionId'
+    foreignKey: 'type'
   })
   public students: HasMany<typeof Apply>
 }

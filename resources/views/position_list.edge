@@ -2,6 +2,9 @@
 @set('title', 'موقعیت‌های کارآموزی')
 
 @section('body')
+@set('search', request.qs().search || '')
+@set('sex', request.qs().sex || '')
+@set('selectedType', request.qs().type || '')
 <!-- start main section --><!-- start main section -->
 <div class="mb-5">
   <div class="container min-80">
@@ -13,26 +16,26 @@
             <div class="w-100 p-4 aside_container">
               <h6>جست و جو بر اساس</h6>
               <div class="d-flex mt-4 mb-5">
-                <input name="search" class="form-control p-3" type="search" placeholder="عنوان شغلی، مهارت و …" />
+                <input value="{{search}}" name="search" class="form-control p-3" type="search" placeholder="عنوان شغلی، مهارت و …" />
               </div>
               <h6 class="mb-3">بر اساس جنسیت</h6>
               <div class="fw-light">
                 <label for="all_gender" class="radio_btn my-2 py-1">
-                  <input name="sex" value="1" type="radio" name="gender" id="all_gender" class="radio_input" checked />
+                  <input name="sex" value="" type="radio" name="sex" id="all_gender" class="radio_input" {{sex === '' && 'checked'}} />
                   <div class="radio_radio d-inline-block me-2"></div>
                   نمایش همه
                 </label>
               </div>
               <div class="fw-light radio_div">
                 <label for="mens" class="radio_btn my-2 py-1">
-                  <input name="sex" value="2" type="radio" name="gender" id="mens" class="radio_input" />
+                  <input name="sex" value="2" type="radio" name="sex" id="mens" class="radio_input" {{sex == 2 && 'checked'}}/>
                   <div class="radio_radio d-inline-block me-2"></div>
                   فقط آقایان
                 </label>
               </div>
               <div class="fw-light">
                 <label for="womens" class="radio_btn my-2 py-1">
-                  <input name="sex" value="3" type="radio" name="gender" id="womens" class="radio_input" />
+                  <input name="sex" value="3" type="radio" name="sex" id="womens" class="radio_input" {{sex == 3 && 'checked'}}/>
                   <div class="radio_radio d-inline-block me-2"></div>
                   فقط بانوان
                 </label>
@@ -40,33 +43,22 @@
               <!--  -->
               <h6 class="mb-3 mt-4">بر اساس رشته</h6>
               <div class="fw-light hos">
-                <label for="all_major" class="radio_btn my-2 py-1">
-                  <input type="radio" name="Major" id="all_major" class="radio_input" checked />
+                <label for="all_type" class="radio_btn my-2 py-1">
+                  <input value="" type="radio" name="type" id="all_type" class="radio_input" {{!selectedType && 'checked'}} />
                   <div class="radio_radio d-inline-block me-2"></div>
                   نمایش همه
                 </label>
               </div>
-              <div class="fw-light radio_div">
-                <label for="camputer" class="radio_btn my-2 py-1">
-                  <input type="radio" name="Major" id="camputer" class="radio_input" />
-                  <div class="radio_radio d-inline-block me-2"></div>
-                  کامپیوتر
-                </label>
-              </div>
-              <div class="fw-light">
-                <label for="elec" class="radio_btn my-2 py-1">
-                  <input type="radio" name="Major" id="elec" class="radio_input" />
-                  <div class="radio_radio d-inline-block me-2"></div>
-                  برق
-                </label>
-              </div>
-              <div class="fw-light">
-                <label for="math" class="radio_btn my-2 py-1">
-                  <input type="radio" name="Major" id="math" class="radio_input" />
-                  <div class="radio_radio d-inline-block me-2"></div>
-                  ریاضی
-                </label>
-              </div>
+              @each(type in types)
+                <div class="fw-light radio_div">
+                  <label for="type-{{type.id}}" class="radio_btn my-2 py-1">
+                    <input value="{{type.id}}" type="radio" name="type" id="type-{{type.id}}" class="radio_input" {{selectedType == type.id && 'checked'}} />
+                    <div class="radio_radio d-inline-block me-2"></div>
+                    {{type.name}}
+                  </label>
+                </div>
+              @endeach
+
               <div class="w-75">
                 <div class="gradiant text-center px-0 w-50 mt-4 py-1 btn_shadow">
                   <button class="btn text-white text-center px-xl-3" href="#" role="button">اعمال</button>
@@ -83,7 +75,7 @@
       </section>
       <!-- end aside section -->
       <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
-        <p class="mb-5 pb-4 fs-6 lean">۱۲۵۰ موقعیت کارآموزی با توجه به جستجوی شما یافت شد</p>
+        <p class="mb-5 pb-4 fs-6 lean">{{positions.length}} موقعیت کارآموزی با توجه به جستجوی شما یافت شد</p>
         <div class="list_items">
           @each(position in positions)
             <div class="w-100 h-100 item d-flex flex-lg-row flex-column justify-content-center justify-content-lg-between align-items-center position-relative mb-5">
@@ -91,9 +83,18 @@
               <div class="h-100 py-4 px-5 w-65 d-flex flex-column flex-lg-row text-lg-start text-center gap-4 align-items-center">
                 <img src="./images/item_img.webp" alt="logo" />
                 <div>
-                  <h6>{{position.title}}</h6>
-                  {{--  <p class="fw-light mt-4">{{position.name}}</p>
-                  <p class="fw-light">{{position.address}}</p>  --}}
+                  <h6>{{position.title}} (
+                  @if(position.sex === 1)
+                  خانم و آقا
+                  @elseif(position.sex === 2)
+                  آقا
+                  @else
+                  خانم
+                  @end
+                  )
+                  </h6>
+                  <p class="fw-light mt-4">{{position.company.name}}</p>
+                  <p class="fw-light">{{position.company.address}}</p>
                 </div>
               </div>
               <div class="pe-lg-5 pb-3 py-lg-0">
@@ -105,26 +106,35 @@
           @endeach
 
         </div>
-        <!-- next and previous buttons -->
+
+        <!-- pagination -->
         <div class="mt-5 mx-auto">
           <div class="container mt-5 pt-5 d-flex justify-content-between flex-wrap-reverse">
+            
+            @if(positions.hasMorePages)
             <div class="col-lg-3 col-md-3 col-xs-4 col-12 p-2">
               <div class="w-100 previous text-center d-flex justify-content-center align-items-center">
                 <div class="d-flex justify-content-center align-items-center">
-                  <a href="" class="text-decoration-none d-block"> صفحه قبل</a>
+                  <a href="?page={{positions.currentPage+1}}&type={{selectedType}}&sex={{sex}}&search={{search}}" class="text-decoration-none d-block"> صفحه بعد</a>
                 </div>
               </div>
             </div>
+            @end
+
+            @if(positions.firstPage !== positions.currentPage)
             <div class="col-lg-3 col-md-3 col-xs-4 col-12 p-2">
               <div class="w-100 previous text-center d-flex justify-content-center align-items-center">
                 <div class="d-flex justify-content-center align-items-center">
-                  <a href="" class="text-decoration-none d-block"> صفحه بعد</a>
+                  <a href="?page={{positions.currentPage-1}}&type={{selectedType}}&sex={{sex}}&search={{search}}" class="text-decoration-none d-block"> صفحه قبل</a>
                 </div>
               </div>
             </div>
+            @end
+
           </div>
         </div>
-        <!-- end next and previous buttons -->
+        <!-- end pagination -->
+
       </section>
     </div>
   </div>

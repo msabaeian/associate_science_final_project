@@ -1,14 +1,22 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Database from '@ioc:Adonis/Lucid/Database'
 import Position from 'App/Models/Position'
-import User from 'App/Models/User'
-import PositionSex from 'Contracts/Enums/PositionSex'
+import PositionType from 'App/Models/PositionType'
 
 export default class PositionsController {
     public async all(ctx: HttpContextContract){
-        const {page = 1,search = "",type} = ctx.request.all()
-        const positions = await Database.query().select('*').from('positions').leftJoin('users','users.id','positions.company_id')
-        return ctx.view.render('position_list', {positions})
+        const {page = 1,search = '',type = '',sex = ''} = ctx.request.qs()
+        const positions = Position.query().preload("company")
+        if(search){
+            positions.where('title', 'like', `%${search}%`)
+        }
+        if(type){
+            positions.where('type', type)
+        }
+        if(sex){
+            positions.where('sex', sex)
+        }
+        const types = await PositionType.all()
+        return ctx.view.render('position_list', {positions: await positions.paginate(page, 5), types})
     }
 
     public async index(ctx: HttpContextContract){
