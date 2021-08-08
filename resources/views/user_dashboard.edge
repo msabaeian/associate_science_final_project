@@ -19,30 +19,30 @@
           </section>
           <!-- end aside section -->
           <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
-            <div
-              class="
-                w-100
-                item
-                d-flex
-                flex-lg-row flex-column
-                justify-content-center justify-content-lg-between
-                align-items-center
-                position-relative
-                py-3
-              "
-            >
-              <div class="red-right-box position-absolute h-100 start-0"></div>
-              <div class="h-100 py-4 ps-lg-5 w-65 d-flex flex-column flex-lg-row text-lg-start text-center gap-4 align-items-center">
-                <img src="./images/item_img.webp" alt="logo" />
-                <div>
-                  <h6>کارآموز طراحی وب (Front-end)</h6>
-                  <p class="fw-light mt-4">وضعیت: مشخص نشده</p>
+            @each(apply in applies)
+              <div class=" w-100 item d-flex flex-lg-row flex-column justify-content-center justify-content-lg-between align-items-center position-relative py-3 mb-3">
+                <div class="red-right-box position-absolute h-100 start-0"></div>
+                <div class="h-100 py-4 ps-lg-5 w-65 d-flex flex-column flex-lg-row text-lg-start text-center gap-4 align-items-center">
+                  <img src="{{apply.position.company.image}}" alt="logo" />
+                  <div>
+                    <h6>{{apply.position.title}}</h6>
+                    <p class="fw-light mt-4">{{apply.position.company.name}}</p>                    
+                    </p>
+                  </div>
+                </div>
+                <div class="pe-lg-5 pb-3 py-lg-0">
+                  <div class="gradiant d align-items-center justify-content-center item_btn px-lg-3 px-2 py-3 text-white">
+                    @if(!apply.position.student)
+                      مشخص نشده
+                    @elseif(apply.position.student && apply.position.student.id === auth.user.id)
+                      تبریک، شما تایید شده اید
+                    @else
+                      رد شده
+                    @end
+                  </div>
                 </div>
               </div>
-              <div class="pe-lg-5 pb-3 py-lg-0">
-                <div class="gradiant d align-items-center justify-content-center item_btn px-lg-3 px-2 py-3 text-white">فرستاده شده</div>
-              </div>
-            </div>
+            @endeach
           </section>
         </div>
       </div>

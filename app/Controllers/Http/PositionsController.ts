@@ -30,7 +30,7 @@ export default class PositionsController {
         
         return ctx.view.render('position', {position, appliedBefore: !!apply, isYours:position?.companyId === ctx.auth.user?.id})
     }
-
+    
     public async apply(ctx: HttpContextContract){
         const id = +ctx.params.id
         const apply = await Apply.query().where('positionId',id).andWhere('studentId',ctx.auth.user?.id || '').first()
@@ -44,5 +44,10 @@ export default class PositionsController {
         })
         ctx.session.flash('success', 'درخواست شما با موفقیت ثبت شد!')
         return ctx.response.redirect().back()
+    }
+    
+    public async studentAppliedPositions(ctx: HttpContextContract){
+        const applies = await Apply.query().preload("position", (query) => { query.preload("company").preload("student") }).where('studentId',ctx.auth.user?.id || 0)
+        return ctx.view.render('user_dashboard', {applies})
     }
 }

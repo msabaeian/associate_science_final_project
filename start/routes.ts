@@ -37,9 +37,9 @@ Route.get('/positions', 'PositionsController.all')
 Route.get('/position/:id', 'PositionsController.index')
 Route.post('/position/:id', 'PositionsController.apply').middleware('auth')
 
-Route.get('/about', ({ view }) => view.render('about_us'))
+Route.get('/about', 'PositionsController.index')
 
-Route.get('/usercp', ({ view }) => view.render('user_dashboard')).middleware('auth')
+Route.get('/usercp', 'PositionsController.studentAppliedPositions').middleware('auth')
 Route.group(() => {
   Route.get('/positions', 'CompaniesController.all')
   Route.get('/position/create', 'CompaniesController.createShow')
