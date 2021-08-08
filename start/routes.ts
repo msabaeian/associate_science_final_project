@@ -40,6 +40,10 @@ Route.post('/position/:id', 'PositionsController.apply').middleware('auth')
 Route.get('/about', 'PositionsController.index')
 
 Route.get('/usercp', 'PositionsController.studentAppliedPositions').middleware('auth')
+Route.get('/profile', 'UsersController.index').middleware('auth')
+Route.post('/profile', 'UsersController.update').middleware('auth')
+Route.post('/profile/password', 'UsersController.updatePassword').middleware('auth')
+
 Route.group(() => {
   Route.get('/positions', 'CompaniesController.all')
   Route.get('/position/create', 'CompaniesController.createShow')

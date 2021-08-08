@@ -1,0 +1,87 @@
+@layout('layouts/default')
+@set('title', 'پروفایل')
+
+@section('body')
+    <div class="mb-5">
+      <div class="container min-80">
+        <div class="row d-flex flex-column flex-lg-row justify-content-center gap-lg-0 gap-4 justify-content-lg-around">
+          <!-- start aside section -->
+          <section class="col-lg-3 col-md-6 col-sm-7 col-11 p-3 mx-auto">
+            <aside class="w-100">
+              <div class="w-100 p-4 aside_container f-14">
+                <h6 class="fw-bold">توجه</h6>
+                <p class="fw-light mt-3">لطفا اطلاعات کاربری خود را به صورت دقیق وارد نمایید</p>
+              </div>
+            </aside>
+          </section>
+          <!-- end aside section -->
+          <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
+            <div>
+              @include('partials/error')
+              @include('partials/success')
+              <form action="{{ route('UsersController.update') }}" method="POST" enctype="multipart/form-data">
+                {{ csrfField() }}
+                <div class="row w-100 py-3 g-4">
+
+                  <div class="mb-1">
+                    <label for="name" class="form-label">نام</label>
+                    <input name="name" value="{{auth.user.name}}" class="form-control form-control-lg" id="name" placeholder="مثال: کارآموز محمد صبائیان">
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="email" class="form-label">ایمیل</label>
+                    <input value="{{auth.user.email}}" disabled class="form-control form-control-lg" id="name" placeholder="مثال: کارآموز محمد صبائیان">
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="phone" class="form-label">شماره تماس</label>
+                    <input name="phone" value="{{auth.user.phone}}" class="form-control form-control-lg" id="phone" placeholder="مثال: 09378470956">
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="formFile" class="form-label">انتخاب تصویر</label>
+                    <input class="form-control" type="file" id="formFile" accept="image/png,image/jpg,image/jpeg">
+                  </div>
+
+                  @if(auth.user.role === 3)
+                    <div class="mb-1">
+                      <label for="address" class="form-label">آدرس</label>
+                      <input name="address" value="{{auth.user.address}}" class="form-control form-control-lg" id="address">
+                    </div>
+                  @end
+
+                  <div class="col-lg-4 nav_btn gradiant d-lg-flex align-items-center justify-content-center order-last text-center">
+                    <button type="submit" class="btn f-14 d-block w-100 btn_shadow text-white">بروزرسانی</button>
+                  </div>
+                  
+                </div>
+              </form>
+              <hr />
+              <form action="{{ route('UsersController.updatePassword') }}" method="POST">
+                {{ csrfField() }}
+                <div class="row w-100 py-3 g-4">
+
+                  <div class="mb-1">
+                    <label for="password" class="form-label">کلمه عبور</label>
+                    <input name="password" type="password" class="form-control form-control-lg" id="password">
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="password_confirmation" class="form-label">تکرار کلمه عبور</label>
+                    <input name="password_confirmation" type="password" class="form-control form-control-lg" id="password_confirmation">
+                  </div>
+
+                  <div class="col-lg-4 nav_btn gradiant d-lg-flex align-items-center justify-content-center order-last text-center">
+                    <button type="submit" class="btn f-14 d-block w-100 btn_shadow text-white">تغیر کلمه عبور</button>
+                  </div>
+                  
+                </div>
+              </form>
+              
+              @include('partials/error')
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+@end

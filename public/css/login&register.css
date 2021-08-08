@@ -14,10 +14,15 @@ body {
 .title {
   font-weight: bold;
   background-clip: text;
+  -webkit-background-clip: text;
+  -ms-background-clip: text;
+  -moz-background-clip: text;
+  -o-background-clip: text;
   background-image: linear-gradient(70deg, #f44e78 3%, #ed6d4b 98%);
   -webkit-text-fill-color: transparent;
   -ms-text-fill-color: transparent;
   -moz-text-fill-color: transparent;
+  -o-text-fill-color: transparent;
   font-size: 45px;
   user-select: none;
 }

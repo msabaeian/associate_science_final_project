@@ -20,13 +20,13 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-center">
             @if(auth.isLoggedIn)
               <li class="nav-item px-3 ps-lg-5">
-                <p class="nav-link fw-bold" href="#">
+                <a class="nav-link fw-bold" href="{{route('UsersController.index')}}">
                   @if(auth.user.role === 2)
                     {{auth.user.name}} عزیز
                   @else
                     شرکت {{auth.user.name}}
                   @end
-                </p>
+                </a>
               </li>
 
               @if(auth.user.role === 2)
