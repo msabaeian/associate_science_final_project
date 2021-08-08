@@ -21,9 +21,6 @@ export default class PositionsController {
     }
 
     public async index(ctx: HttpContextContract){
-        ctx.session.flash('error', 'شما قبلا برای این موقعیت درخواست ثبت کرده‌اید')
-        ctx.session.flashMessages.set('hi', 'hello')
-        console.log(ctx.session.flashMessages.all())
         const id = +ctx.params.id
         const position = await Position.query().preload("positionType").preload("company").where('id', id).first()
         if(!position){
