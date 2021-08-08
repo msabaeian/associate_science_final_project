@@ -6,7 +6,7 @@ import PositionType from 'App/Models/PositionType'
 export default class PositionsController {
     public async all(ctx: HttpContextContract){
         const {page = 1,search = '',type = '',sex = ''} = ctx.request.qs()
-        const positions = Position.query().preload("company")
+        const positions = Position.query().preload("company").whereNull("studentId")
         if(search){
             positions.where('title', 'like', `%${search}%`)
         }
