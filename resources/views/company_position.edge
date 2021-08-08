@@ -23,119 +23,52 @@
           </section>
           <!-- end aside section -->
           <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
-            <p class="mb-2 pb-4 fs-6">۵ کارجو برای این موقعیت درخواست ارسال کرده اند</p>
+            @include('partials/success')
+            @include('partials/error')
             <div>
+              @if(position.studentId)
+                <p>کارجوی انتخاب شده</p>
+                <div class="row w-100 py-3 g-4 gy-5">
+                  <div class="col-lg-6">
+                    <div class="position_item w-100 position-relative d-flex p-3">
+                      <div class="user_img me-3">
+                        <img src={{position.student.image}} alt="{{position.student.name}}" class="w-100 h-100" />
+                      </div>
+                      <div class="mb-2">
+                        <p>{{position.student.name}}</p>
+                        <p>{{position.student.email}}</p>
+                        <p>{{position.student.phone}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr />
+              @end
+              <p class="mb-2 fs-6">{{position.students.length}} کارجو برای این موقعیت درخواست ارسال کرده اند</p>
               <div class="row w-100 py-3 g-4 gy-5">
+                @each(student in position.students)
                 <div class="col-lg-6">
                   <div class="position_item w-100 position-relative d-flex p-3">
                     <div class="user_img me-3">
-                      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="user image" class="w-100 h-100" />
+                      <img src={{student.student.image}} alt="{{student.student.name}}" class="w-100 h-100" />
                     </div>
                     <div class="mb-2">
-                      <p>حسن عظیمی</p>
-                      <p>hassan@email.com</p>
-                      <p>۰۹۳۷۸۴۷۰۹۵۶</p>
+                      <p>{{student.student.name}}</p>
+                      <p>{{student.student.email}}</p>
+                      <p>{{student.student.phone}}</p>
                     </div>
-                    <div class="accept text-center position-absolute">
-                      <div class="py-1">
-                        <a href="" class="text-decoration-none d-block"> تایید</a>
-                      </div>
-                    </div>
-                    <div class="reject position-absolute text-center">
-                      <div class="py-1">
-                        <a href="" class="text-decoration-none d-block"> رد</a>
-                      </div>
-                    </div>
+                    @if(!position.studentId)
+                      <form accept="{{route('CompaniesController.selectStudent',{id: position.id})}}" method="POST">
+                        {{csrfField()}}
+                        <input name="student" value="{{student.student.id}}" hidden />
+                        <button class="btn accept text-center text-white py-2 position-absolute left-0 right-0">
+                          تایید
+                        </button>
+                      </form>
+                    @end
                   </div>
                 </div>
-                <div class="col-lg-6">
-                  <div class="position_item w-100 position-relative d-flex p-3">
-                    <div class="user_img me-3">
-                      <img src="https://randomuser.me/api/portraits/women/74.jpg" alt="user image" class="w-100 h-100" />
-                    </div>
-                    <div class="mb-2">
-                      <p>لیلی عظیمی</p>
-                      <p>hassan@email.com</p>
-                      <p>۰۹۳۷۸۴۷۰۹۵۶</p>
-                    </div>
-                    <div class="accept text-center position-absolute">
-                      <div class="py-1">
-                        <a href="" class="text-decoration-none d-block"> تایید</a>
-                      </div>
-                    </div>
-                    <div class="reject position-absolute text-center">
-                      <div class="py-1">
-                        <a href="" class="text-decoration-none d-block"> رد</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="position_item w-100 position-relative d-flex p-3">
-                    <div class="user_img me-3">
-                      <img src="https://randomuser.me/api/portraits/men/73.jpg" alt="user image" class="w-100 h-100" />
-                    </div>
-                    <div class="mb-2">
-                      <p>عظیم حسینی</p>
-                      <p>hassan@email.com</p>
-                      <p>۰۹۳۷۸۴۷۰۹۵۶</p>
-                    </div>
-                    <div class="accept text-center position-absolute">
-                      <div class="py-1">
-                        <a href="" class="text-decoration-none d-block"> تایید</a>
-                      </div>
-                    </div>
-                    <div class="reject position-absolute text-center">
-                      <div class="py-1">
-                        <a href="" class="text-decoration-none d-block"> رد</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="position_item w-100 position-relative d-flex p-3">
-                    <div class="user_img me-3">
-                      <img src="https://randomuser.me/api/portraits/men/70.jpg" alt="user image" class="w-100 h-100" />
-                    </div>
-                    <div class="mb-2">
-                      <p>رضا حسینی</p>
-                      <p>hassan@email.com</p>
-                      <p>۰۹۳۷۸۴۷۰۹۵۶</p>
-                    </div>
-                    <div class="accept text-center position-absolute">
-                      <div class="py-1">
-                        <a href="" class="text-decoration-none d-block"> تایید</a>
-                      </div>
-                    </div>
-                    <div class="reject position-absolute text-center">
-                      <div class="py-1">
-                        <a href="" class="text-decoration-none d-block"> رد</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="position_item w-100 position-relative d-flex p-3">
-                    <div class="user_img me-3">
-                      <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="user image" class="w-100 h-100" />
-                    </div>
-                    <div class="mb-2">
-                      <p>مریم حسینی</p>
-                      <p>hassan@email.com</p>
-                      <p>۰۹۳۷۸۴۷۰۹۵۶</p>
-                    </div>
-                    <div class="accept text-center position-absolute">
-                      <div class="py-1">
-                        <a href="" class="text-decoration-none d-block"> تایید</a>
-                      </div>
-                    </div>
-                    <div class="reject position-absolute text-center">
-                      <div class="py-1">
-                        <a href="" class="text-decoration-none d-block"> رد</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                @endeach
               </div>
             </div>
           </section>

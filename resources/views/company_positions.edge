@@ -21,29 +21,31 @@
           <!-- end aside section -->
           <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
             @include('partials/success')
-            <h2 class="mb-3">موقعیت‌های باز</h2>
-            <div>
-              @each(position in positions.filter(a => !a.studentId))
-                <div class=" w-100 h-100 item d-flex flex-lg-row flex-column justify-content-center justify-content-lg-between align-items-center position-relative mb-5">
-                  <div class="red-right-box position-absolute h-100 start-0"></div>
-                  <div class="h-100 py-4 ps-lg-5 w-65 d-flex flex-column flex-lg-row text-lg-start text-center gap-4 align-items-center">
-                    <img src={{auth.user.image}} alt="logo" />
-                    <div>
-                      <h6>{{position.title}}</h6>
-                      <p class="fw-light mt-4">{{position.students.length}} روزمه دریافت شده است</p>
-                      @if(position.studentId)
-                      <p class="fw-light">شما کارآموز این موقعیت را انتخاب کرده‌اید</p>
-                      @end
+            @if(positions.some(a => !a.studentId))
+              <h2 class="mb-3">موقعیت‌های باز</h2>
+              <div>
+                @each(position in positions.filter(a => !a.studentId))
+                  <div class=" w-100 h-100 item d-flex flex-lg-row flex-column justify-content-center justify-content-lg-between align-items-center position-relative mb-5">
+                    <div class="red-right-box position-absolute h-100 start-0"></div>
+                    <div class="h-100 py-4 ps-lg-5 w-65 d-flex flex-column flex-lg-row text-lg-start text-center gap-4 align-items-center">
+                      <img src={{auth.user.image}} alt="logo" />
+                      <div>
+                        <h6>{{position.title}}</h6>
+                        <p class="fw-light mt-4">{{position.students.length}} روزمه دریافت شده است</p>
+                        @if(position.studentId)
+                        <p class="fw-light">شما کارآموز این موقعیت را انتخاب کرده‌اید</p>
+                        @end
+                      </div>
+                    </div>
+                    <div class="pe-lg-5 pb-3 py-lg-0">
+                      <div class="gradiant align-items-center justify-content-center item_btn btn_shadow">
+                        <a class="btn text-white d-block w-100 f-14 px-lg-4 px-3 py-1" href="{{route('CompaniesController.index',{id: position.id})}}" role="button">درخواست ها</a>
+                      </div>
                     </div>
                   </div>
-                  <div class="pe-lg-5 pb-3 py-lg-0">
-                    <div class="gradiant align-items-center justify-content-center item_btn btn_shadow">
-                      <a class="btn text-white d-block w-100 f-14 px-lg-4 px-3 py-1" href="{{route('CompaniesController.index',{id: position.id})}}" role="button">درخواست ها</a>
-                    </div>
-                  </div>
-                </div>
-              @endeach
-            </div>
+                @endeach
+              </div>
+            @end
 
             @if(positions.some(a => a.studentId))
             <h2 class="mb-3">موقعیت‌های بسته</h2>

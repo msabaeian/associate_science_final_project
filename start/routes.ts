@@ -45,5 +45,6 @@ Route.group(() => {
   Route.get('/position/create', 'CompaniesController.createShow')
   Route.post('/position/create', 'CompaniesController.store')
   Route.get('/position/:id', 'CompaniesController.index')
+  Route.post('/position/:id', 'CompaniesController.selectStudent')
   
 }).prefix('/company').middleware('auth')

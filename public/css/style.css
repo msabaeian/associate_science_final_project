@@ -406,8 +406,10 @@ img {
 .accept {
   width: 27%;
   border-radius: 8px;
-  bottom: -18px;
-  right: 17%;
+  bottom: -22px;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
   background: linear-gradient(83deg, #f44e78 0%, #ed6d4b 100%);
   padding: 2px;
   transition: all 0.3s;
