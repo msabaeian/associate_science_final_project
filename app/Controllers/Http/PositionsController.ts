@@ -1,4 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Apply from 'App/Models/Apply'
 import Position from 'App/Models/Position'
 import PositionType from 'App/Models/PositionType'
 
@@ -20,6 +21,31 @@ export default class PositionsController {
     }
 
     public async index(ctx: HttpContextContract){
-        return ctx.view.render('position')
+        ctx.session.flash('error', 'شما قبلا برای این موقعیت درخواست ثبت کرده‌اید')
+        ctx.session.flashMessages.set('hi', 'hello')
+        console.log(ctx.session.flashMessages.all())
+        const id = +ctx.params.id
+        const position = await Position.query().preload("positionType").preload("company").where('id', id).first()
+        if(!position){
+            return ctx.response.redirect('/')
+        }
+        const apply = await Apply.query().where('positionId',id).andWhere('studentId',ctx.auth.user?.id || '').first()
+        
+        return ctx.view.render('position', {position, appliedBefore: !!apply, isYours:position?.companyId === ctx.auth.user?.id})
+    }
+
+    public async apply(ctx: HttpContextContract){
+        const id = +ctx.params.id
+        const apply = await Apply.query().where('positionId',id).andWhere('studentId',ctx.auth.user?.id || '').first()
+        if(apply){
+            ctx.session.flash('error', 'شما قبلا برای این موقعیت درخواست ثبت کرده‌اید')
+            return ctx.response.redirect().back()
+        }
+        Apply.create({
+            positionId: id,
+            studentId: ctx.auth.user?.id,
+        })
+        ctx.session.flash('success', 'درخواست شما با موفقیت ثبت شد!')
+        return ctx.response.redirect().back()
     }
 }

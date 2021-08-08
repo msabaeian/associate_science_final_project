@@ -20,12 +20,12 @@ export default class Apply extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => User , {
-    localKey: 'studentId'
+    foreignKey: 'studentId'
   })
   public student: BelongsTo<typeof User>
 
   @belongsTo(() => Position, {
-    localKey: 'positionId'
+    foreignKey: 'positionId'
   })
   public position: BelongsTo<typeof Position>
 }

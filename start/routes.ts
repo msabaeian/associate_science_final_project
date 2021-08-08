@@ -35,6 +35,7 @@ Route.get('/logout', 'AuthController.logout')
 
 Route.get('/positions', 'PositionsController.all')
 Route.get('/position/:id', 'PositionsController.index')
+Route.post('/position/:id', 'PositionsController.apply').middleware('auth')
 
 Route.get('/about', ({ view }) => view.render('about_us'))
 

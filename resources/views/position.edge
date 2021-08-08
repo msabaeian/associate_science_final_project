@@ -1,52 +1,61 @@
 @layout('layouts/default')
-@set('title', 'موقعیت‌ کارآموزی')
+@set('title', position.title)
 
 @section('body')
 <div class="container">
-  <div
-    class="
-      section
-      px-4
-      py-5
-      d-flex
-      justify-content-lg-between justify-content-center
-      gap-4
-      flex-lg-row flex-column
-      gradiant
-      align-items-center
-      text-center text-lg-start
-    "
-  >
+  @include('partials/success')
+  @include('partials/error')
+  @if(isYours)
+  <div class="alert alert-success w-100" role="alert">
+    این موقعیت کارآموزی شرکت شما است.
+  </div>
+  @end
+  <div class="section px-4 py-5 d-flex justify-content-lg-between justify-content-center gap-4 flex-lg-row flex-column gradiant align-items-center text-center text-lg-start">
     <div class="text-white">
-      <h2 class="mb-4">کارآموز برنامه نویسی PHP</h2>
-      <p>مخصوص دانشجویان رشته نرم‌افزار</p>
-      <p>مجموعا ۲۴۰ ساعت کارآموزی</p>
-      <div class="phonenumber mt-4 d-flex text-center mx-auto mx-lg-0 btn_shadow">
-        <a href="" class="text-decoration-none">
-          <p class="phonenumber">ارسال درخواست کارآموزی</p>
-        </a>
-      </div>
+      <h2 class="mb-4">{{position.title}}</h2>
+      <p>مخصوص دانشجویان رشته {{position.positionType.name}}</p>
+      <p>مخصوص 
+        @if(position.sex === 1)
+        خانم و آقا
+        @elseif(position.sex === 2)
+        آقا
+        @else
+        خانم
+        @end
+      </p>
+
+      @if(!isYours && !appliedBefore && auth.isLoggedIn)
+        <form action="{{route('PositionsController.apply', {id: position.id})}}" method="POST">
+          {{csrfField()}}
+          <button class="btn phonenumber mt-4 d-flex text-center mx-auto mx-lg-0 btn_shadow d-flex justify-content-center align-items-center">
+            ارسال درخواست کارآموزی
+          </button>
+          </button>
+        </form>
+      @end
+
+      @if(appliedBefore)
+        <div class="alert alert-warning w-100" role="alert">
+          شما برای این موقعیت کارآموزی درخواست ثبت کرده‌اید.
+        </div>
+      @end
+
+      @if(!auth.isLoggedIn)
+        <div class="alert alert-warning w-100" role="alert">
+          برای ثبت درخواست لطفا وارد شوید
+        </div>
+      @end
     </div>
     <div class="uni_logo order-first order-lg-last">
-      <!-- <img src="" class="w-100 h-100" alt="" /> -->
+      <img src="{{position.company.image}}" class="w-100 h-100" alt="" />
+      <p class="text-white text-center mt-2">{{position.company.name}}</p>
     </div>
   </div>
 </div>
 <div class="container my-5 py-4">
   <div class="mb-5 pb-5 description px-3 px-lg-0">
-    <p>
-      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-      سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و
-      سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
-      خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به
-      پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-      <br /><br />
-      لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
-      سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و
-      سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
-      خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به
-      پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.
-    </p>
+    <p>{{position.description}}</p>
+    <p>آدرس شرکت: {{position.company.address}}</p>
   </div>
 </div>
 @end
