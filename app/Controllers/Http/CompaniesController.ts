@@ -36,7 +36,7 @@ export default class CompaniesController {
         })
 
         ctx.session.flash('success', 'با موفقیت ایجاد شد')
-        return ctx.response.redirect().toRoute('CompaniesController.index')
+        return ctx.response.redirect().toRoute('CompaniesController.all')
         // return this.login(ctx)
     }
 }
