@@ -1,5 +1,5 @@
 @layout('layouts/default')
-@set('title', 'موقعیت‌های کارآموزی')
+@set('title', 'موقعیت‌های شغلی')
 
 @section('body')
 @set('search', request.qs().search || '')
@@ -75,7 +75,7 @@
       </section>
       <!-- end aside section -->
       <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
-        <p class="mb-5 pb-4 fs-6 lean">{{positions.length}} موقعیت کارآموزی با توجه به جستجوی شما یافت شد</p>
+        <p class="mb-5 pb-4 fs-6 lean">{{positions.length}} موقعیت شغلی با توجه به جستجوی شما یافت شد</p>
         <div class="list_items">
           @each(position in positions)
             <div class="w-100 h-100 item d-flex flex-lg-row flex-column justify-content-center justify-content-lg-between align-items-center position-relative mb-5">

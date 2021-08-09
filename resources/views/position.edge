@@ -7,7 +7,7 @@
   @include('partials/error')
   @if(isYours)
   <div class="alert alert-success w-100" role="alert">
-    این موقعیت کارآموزی شرکت شما است.
+    این موقعیت شغلی شرکت شما است.
   </div>
   @end
   <div class="section px-4 py-5 d-flex justify-content-lg-between justify-content-center gap-4 flex-lg-row flex-column gradiant align-items-center text-center text-lg-start">
@@ -28,7 +28,7 @@
         <form action="{{route('PositionsController.apply', {id: position.id})}}" method="POST">
           {{csrfField()}}
           <button class="btn phonenumber mt-4 d-flex text-center mx-auto mx-lg-0 btn_shadow d-flex justify-content-center align-items-center">
-            ارسال درخواست کارآموزی
+            ارسال درخواست
           </button>
           </button>
         </form>
@@ -36,7 +36,7 @@
 
       @if(appliedBefore)
         <div class="alert alert-warning w-100" role="alert">
-          شما برای این موقعیت کارآموزی درخواست ثبت کرده‌اید.
+          شما برای این موقعیت شغلی درخواست ثبت کرده‌اید.
         </div>
       @end
 
