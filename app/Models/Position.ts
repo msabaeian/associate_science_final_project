@@ -1,13 +1,17 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 import Apply from './Apply'
 import PositionSex from 'Contracts/Enums/PositionSex'
 import PositionType from './PositionType'
+import PositionCategory from './PositionCategory'
 
 export default class Position extends BaseModel {
   @column({ isPrimary: true })
   public id: number
+
+  @column()
+  public categoryId: number
 
   @column()
   public companyId: number
@@ -47,6 +51,11 @@ export default class Position extends BaseModel {
     foreignKey: 'type'
   })
   public positionType: BelongsTo<typeof PositionType>
+
+  @belongsTo(() => PositionCategory, {
+    foreignKey: 'categoryId'
+  })
+  public category: BelongsTo<typeof PositionCategory>
 
   @hasMany(() => Apply)
   public students: HasMany<typeof Apply>
