@@ -9,7 +9,9 @@ export default class PositionCategory extends BaseModel {
   @column()
   public name: string
 
-  @hasMany(() => Position)
+  @hasMany(() => Position, {
+    foreignKey: 'id'
+  })
   public positions: HasMany<typeof Position>
 
   @column.dateTime({ autoCreate: true })

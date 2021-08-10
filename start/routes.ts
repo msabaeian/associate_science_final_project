@@ -61,5 +61,5 @@ Route.group(() => {
   Route.get('/types', 'AdminController.typeList')
   Route.get('/types/:id', 'AdminController.typeShow')
   Route.post('/types/:id', 'AdminController.typeStore')
-  Route.post('/stats', 'AdminController.stats')
+  Route.get('/stats', 'AdminController.stats')
 }).prefix('/admin').middleware('auth').middleware('admin')

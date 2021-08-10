@@ -1,0 +1,113 @@
+@layout('layouts/default')
+@set('title', 'آمار و اطلاعات')
+@set('ddd',types.reduce((t,c) => [...t,c.name], []))
+@section('body')
+<div class="mb-5">
+  <div class="container min-80">
+    <div class="row d-flex flex-column flex-lg-row justify-content-center gap-lg-0 gap-4 justify-content-lg-around">
+      <!-- start aside section -->
+      <section class="col-lg-3 col-md-6 col-sm-7 col-11 p-3 mx-auto">
+        <aside class="w-100">
+          <div class="w-100 p-4 aside_container f-14">
+            <div class="gradiant dark text-center px-0 w-100 py-1 btn_shadow">
+              <a class="btn text-white text-center px-xl-3 f-13 d-block" href="{{route('AdminController.index')}}" role="button">بازگشت</a>
+            </div>
+          </div>
+        </aside>
+      </section>
+      <!-- end aside section -->
+      <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
+        <div>
+            <h3>کاربران</h3>
+            <table class="table">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">نوع</th>
+                    <th scope="col">تعداد</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>کارجو</td>
+                    <td>{{students}}</td>
+                  </tr>
+                  <tr>
+                    <td>شرکت/کارفرما</td>
+                    <td>{{companies}}</td>
+                  </tr>
+                </tbody>
+            </table>
+            
+            <br />
+            <hr />
+            <br />
+
+            <h3>موقعیت‌های شغلی</h3>
+            <table class="table">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">نوع</th>
+                    <th scope="col">تعداد</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>باز (در انتظار یافتن کارجو)</td>
+                    <td>{{openPositions}}</td>
+                  </tr>
+                  <tr>
+                    <td>بسته شده (کارجو انتخاب شده است)</td>
+                    <td>{{closedPositions}}</td>
+                  </tr>
+                </tbody>
+            </table>
+            
+            <br />
+            <hr />
+            <br />
+
+            <h3>موقعیت‌های شغلی براساس نوع قرارداد</h3>
+            <table class="table">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">نوع قرارداد</th>
+                    <th scope="col">تعداد</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @each(type in types)
+                        <tr>
+                            <td>{{type.name}}</td>
+                            <td>{{type.$extras.positions_count}}</td>
+                        </tr>
+                    @endeach
+                </tbody>
+            </table>
+            
+            <br />
+            <hr />
+            <br />
+
+            <h3>موقعیت‌های شغلی براساس نوع دسته‌بندی</h3>
+            <table class="table">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col">نام دسته</th>
+                    <th scope="col">تعداد</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    @each(category in categories)
+                        <tr>
+                            <td>{{category.name}}</td>
+                            <td>{{category.$extras.positions_count}}</td>
+                        </tr>
+                    @endeach
+                </tbody>
+            </table>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+@end

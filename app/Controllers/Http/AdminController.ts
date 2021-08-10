@@ -2,6 +2,10 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import PositionCategory from 'App/Models/PositionCategory'
 import {schema} from '@ioc:Adonis/Core/Validator'
 import PositionType from 'App/Models/PositionType'
+import User from 'App/Models/User'
+import UserRole from 'Contracts/Enums/UserROle'
+import Database from '@ioc:Adonis/Lucid/Database'
+import Position from 'App/Models/Position'
 export default class AdminController {
     public index(ctx: HttpContextContract){
         return ctx.view.render('admin/home')
@@ -96,7 +100,20 @@ export default class AdminController {
     /**
      * stats
      */
-    public stats(ctx: HttpContextContract){
-        return ctx.view.render('admin/home')
+    public async stats(ctx: HttpContextContract){
+        const students = await Database.from('users').count('* as total').where('role', UserRole.STUDENT)
+        const companies = await Database.from('users').count('* as total').where('role', UserRole.COMPANY)
+        const types = await PositionType.query().withCount("positions")
+        const categories = await PositionCategory.query().withCount("positions")
+        const openPositions = await Database.from('positions').count('* as total').whereNull('student_id')
+        const closedPositions = await Database.from('positions').count('* as total').whereNotNull('student_id')
+        return ctx.view.render('admin/stats', {
+            students: students[0].total, 
+            companies: companies[0].total,
+            openPositions: openPositions[0].total,
+            closedPositions: closedPositions[0].total,
+            types: types,
+            categories
+        })
     }
 }
