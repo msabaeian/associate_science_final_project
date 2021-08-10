@@ -3,6 +3,7 @@ import Position from 'App/Models/Position'
 import PositionType from 'App/Models/PositionType'
 import User from 'App/Models/User'
 import {schema} from '@ioc:Adonis/Core/Validator'
+import PositionCategory from 'App/Models/PositionCategory'
 
 export default class CompaniesController {
     public async all(ctx: HttpContextContract){
@@ -16,8 +17,9 @@ export default class CompaniesController {
     }
     
     public async createShow(ctx: HttpContextContract){
-        const position_types = await PositionType.all()
-        return ctx.view.render('company_add_position', {position_types})
+        const types = await PositionType.all()
+        const categories = await PositionCategory.all()
+        return ctx.view.render('company_add_position', {categories, types})
     }
 
     public async store(ctx: HttpContextContract){
@@ -26,6 +28,7 @@ export default class CompaniesController {
             description: schema.string(),
             type: schema.number(),
             sex: schema.number(),
+            category: schema.number(),
         })
 
         const validate = await ctx.request.validate({ 
@@ -34,7 +37,7 @@ export default class CompaniesController {
 
         await Position.create({
             ...validate,
-            companyId: ctx.auth.user?.id,
+            companyId: ctx.auth.user?.id
         })
 
         ctx.session.flash('success', 'با موفقیت ایجاد شد')
