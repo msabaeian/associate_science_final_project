@@ -2,7 +2,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
 import {schema,rules,ParsedTypedSchema} from '@ioc:Adonis/Core/Validator'
 import { uploadToLiaraBucket } from 'App/Helpers/UploadToLiara'
-import UserRole from 'Contracts/Enums/UserROle'
+import UserRole from 'Contracts/Enums/UserRole'
 export default class UsersController {
 
     public loginShow(ctx: HttpContextContract){

@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, beforeSave, column, HasMany, hasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Hash from '@ioc:Adonis/Core/Hash'
-import UserRole from 'Contracts/Enums/UserROle'
+import UserRole from 'Contracts/Enums/UserRole'
 import Position from './Position'
 import Apply from './Apply'
 

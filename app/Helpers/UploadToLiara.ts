@@ -17,7 +17,7 @@ export const uploadToLiaraBucket = async (file: MultipartFileContract): Promise<
     let mimeType = type + "/" + subtype;
     const bucket = Env.get('LIARA_BUCKET')
     const name = cuid() + "." + extname;
-    const upload = await s3
+    await s3
       .putObject({
         Key: name,
         Bucket: bucket,

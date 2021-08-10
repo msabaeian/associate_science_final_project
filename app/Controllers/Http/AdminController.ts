@@ -2,10 +2,8 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import PositionCategory from 'App/Models/PositionCategory'
 import {schema} from '@ioc:Adonis/Core/Validator'
 import PositionType from 'App/Models/PositionType'
-import User from 'App/Models/User'
-import UserRole from 'Contracts/Enums/UserROle'
+import UserRole from 'Contracts/Enums/UserRole'
 import Database from '@ioc:Adonis/Lucid/Database'
-import Position from 'App/Models/Position'
 export default class AdminController {
     public index(ctx: HttpContextContract){
         return ctx.view.render('admin/home')

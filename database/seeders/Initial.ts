@@ -2,7 +2,7 @@ import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import PositionCategory from 'App/Models/PositionCategory'
 import PositionType from 'App/Models/PositionType'
 import User from 'App/Models/User'
-import UserRole from 'Contracts/Enums/UserROle'
+import UserRole from 'Contracts/Enums/UserRole'
 
 export default class InitialSeeder extends BaseSeeder {
   public async run () {
