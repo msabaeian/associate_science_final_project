@@ -2,44 +2,48 @@
 @set('title', 'دسته‌های شغلی')
 
 @section('body')
-    <div class="mb-5">
-      <div class="container min-80">
-        <div class="row d-flex flex-column flex-lg-row justify-content-center gap-lg-0 gap-4 justify-content-lg-around">
-          <!-- start aside section -->
-          <section class="col-lg-3 col-md-6 col-sm-7 col-11 p-3 mx-auto">
-            <aside class="w-100">
-              <div class="w-100 p-4 aside_container f-14">
-                <h6 class="fw-bold">توجه</h6>
-                <p class="fw-light mt-3">
-                    هرچه تعداد دسته‌ها بیشتر باشد سیستم برای کارجو و کارفرمایان بیشتری قابل استفاده می‌شود.
-                </p>
+<div class="mb-5">
+  <div class="container min-80">
+    <div class="row d-flex flex-column flex-lg-row justify-content-center gap-lg-0 gap-4 justify-content-lg-around">
+      <!-- start aside section -->
+      <section class="col-lg-3 col-md-6 col-sm-7 col-11 p-3 mx-auto">
+        <aside class="w-100">
+          <div class="w-100 p-4 aside_container f-14">
+            <h6 class="fw-bold">توجه</h6>
+            <p class="fw-light mt-3">
+                هرچه تعداد دسته‌ها بیشتر باشد سیستم برای کارجو و کارفرمایان بیشتری قابل استفاده می‌شود.
+            </p>
 
-                <div class="gradiant text-center px-0 w-100 mt-4 py-1 btn_shadow">
-                  <a class="btn text-white text-center px-xl-3 f-13 d-block" href="{{route('AdminController.categoryShow', {id: 'new'})}}" role="button">افزودن دسته جدید</a>
-                </div>
-              </div>
-            </aside>
-          </section>
-          <!-- end aside section -->
-          <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
-            @include('partials/messages')
-            <div>
-              <p class="mb-2 fs-6">{{categoeis.length}} دسته شغلی دارید</p>
-              <div class="row w-100 py-3 g-4">
-                @each(category in categoeis)
-                <div class="col-lg-6">
-                  <div class="position_item w-100 position-relative d-flex justify-content-between align-items-center p-3">
-                    <p class="mb-0">{{category.name}}</p>
-                    <a href="{{route('AdminController.categoryShow',{id: category.id})}}" class="btn accept text-center text-white py-2 m-0">
-                        ویرایش
-                    </a>
-                  </div>
-                </div>
-                @endeach
+            <div class="gradiant text-center px-0 w-100 mt-4 py-1 btn_shadow">
+              <a class="btn text-white text-center px-xl-3 f-13 d-block" href="{{route('AdminController.categoryShow', {id: 'new'})}}" role="button">افزودن دسته جدید</a>
+            </div>
+
+            <div class="gradiant dark text-center px-0 w-100 mt-4 py-1 btn_shadow">
+              <a class="btn text-white text-center px-xl-3 f-13 d-block" href="{{route('AdminController.index')}}" role="button">بازگشت</a>
+            </div>
+          </div>
+        </aside>
+      </section>
+      <!-- end aside section -->
+      <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
+        @include('partials/messages')
+        <div>
+          <p class="mb-2 fs-6">{{categoeis.length}} دسته شغلی دارید</p>
+          <div class="row w-100 py-3 g-4">
+            @each(category in categoeis)
+            <div class="col-lg-6">
+              <div class="position_item w-100 position-relative d-flex justify-content-between align-items-center p-3">
+                <p class="mb-0">{{category.name}}</p>
+                <a href="{{route('AdminController.categoryShow',{id: category.id})}}" class="btn accept text-center text-white py-2 m-0">
+                    ویرایش
+                </a>
               </div>
             </div>
-          </section>
+            @endeach
+          </div>
         </div>
-      </div>
+      </section>
     </div>
+  </div>
+</div>
 @end
