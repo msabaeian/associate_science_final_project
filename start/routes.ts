@@ -46,10 +46,10 @@ Route.post('/profile/password', 'UsersController.updatePassword').middleware('au
 
 Route.group(() => {
   Route.get('/positions', 'CompaniesController.all')
-  Route.get('/position/create', 'CompaniesController.createShow')
-  Route.post('/position/create', 'CompaniesController.store')
+  Route.get('/position/create/:id', 'CompaniesController.createShow')
+  Route.post('/position/create/:id', 'CompaniesController.store')
   Route.get('/position/:id', 'CompaniesController.index')
-  Route.post('/position/:id', 'CompaniesController.selectStudent')
+  Route.post('/position/:id/selectStudent', 'CompaniesController.selectStudent')
   
 }).prefix('/company').middleware('auth')
 

@@ -26,8 +26,10 @@
                   @end
                   @if(auth.user.role === 2)
                     {{auth.user.name}} عزیز
-                  @else
+                  @elseif(auth.user.role === 3)
                     شرکت {{auth.user.name}}
+                  @else
+                    مدیر
                   @end
                 </a>
               </li>

@@ -12,14 +12,22 @@ export default class CompaniesController {
     }
 
     public async index(ctx: HttpContextContract){
-        const position = await Position.query().preload("student").preload("students", (query) => query.preload("student")).where('id', ctx.params.id).first()
+        const position = await Position.query().preload("student").preload("students", (query) => query.preload("student")).where('id', ctx.params.id).andWhere('companyId', ctx.auth.user?.id as number).first()
+        if(!position){
+            return ctx.response.redirect().back()
+        }
         return ctx.view.render('company_position', {position})
     }
     
     public async createShow(ctx: HttpContextContract){
+        const isNew = ctx.params.id === "new"
+        const position = isNew ? null : await Position.query().where('id', ctx.params.id).andWhere("companyId",ctx.auth.user?.id as number).first()
+        if(!position && !isNew){
+            return ctx.response.redirect().back()
+        }
         const types = await PositionType.all()
         const categories = await PositionCategory.all()
-        return ctx.view.render('company_add_position', {categories, types})
+        return ctx.view.render('company_add_position', {categories, types, position})
     }
 
     public async store(ctx: HttpContextContract){
@@ -28,24 +36,40 @@ export default class CompaniesController {
             description: schema.string(),
             type: schema.number(),
             sex: schema.number(),
-            category: schema.number(),
+            categoryId: schema.number(),
         })
 
         const validate = await ctx.request.validate({ 
             schema: validationSchema
         })
 
-        await Position.create({
-            ...validate,
-            companyId: ctx.auth.user?.id
-        })
+        const isNew = ctx.params.id === "new"
+        
+        if(isNew){
+            await Position.create({
+                ...validate,
+                companyId: ctx.auth.user?.id
+            })
+            ctx.session.flash('success', 'با موفقیت ایجاد شد')
+        }else{
+            const position = await Position.query().where('id', ctx.params.id).andWhere("companyId",ctx.auth.user?.id as number).first()
+            if(!position) return ctx.response.redirect('/')
+            await position.merge({
+                ...validate
+            }).save()
+            ctx.session.flash('success', 'با موفقیت ویرایش شد')
+        }
 
-        ctx.session.flash('success', 'با موفقیت ایجاد شد')
+
+        
         return ctx.response.redirect().toRoute('CompaniesController.all')
     }
 
     public async selectStudent(ctx: HttpContextContract){
-        const position = await Position.query().preload("student").preload("students").where('id', ctx.params.id).first()
+        const position = await Position.query().preload("student").preload("students").where('id', ctx.params.id).andWhere("companyId",ctx.auth.user?.id as number).first()
+        if(!position){
+            return ctx.response.redirect().back()
+        }
         if(position?.studentId) {
             ctx.session.flash('error', 'شما کارجوی این موقعیت را انتخاب کرده‌اید')
             return ctx.response.redirect().back()

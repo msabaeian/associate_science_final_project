@@ -1,6 +1,7 @@
 @layout('layouts/default')
 @set('title', 'وضعیت موقعیت‌های شغلی')
-
+@set('isEdit', request.params().id !== "new")
+@set('id', request.params().id)
 @section('body')
     <div class="mb-5">
       <div class="container min-80">
@@ -13,6 +14,11 @@
                 <p class="fw-light mt-3">
 هرچه اطلاعات موقعیت شغلی کامل تر باشد توجه افراد بیشتر و بهتری را به خود جذب میکند.
                 </p>
+
+                <div class="gradiant dark text-center px-0 w-100 mt-3 py-1 btn_shadow">
+                  <a class="btn text-white text-center px-xl-3 f-13 d-block" href="{{isEdit ? route('CompaniesController.index', {id:id}) : route('CompaniesController.all')}}" role="button">بازگشت</a>
+                </div>
+                
               </div>
             </aside>
           </section>
@@ -20,34 +26,34 @@
           <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
             <div>
 
-              <form action="{{ route('CompaniesController.store') }}" method="POST" enctype="multipart/form-data">
+              <form action="{{ route('CompaniesController.store', {id: request.params().id }) }}" method="POST" enctype="multipart/form-data">
                 {{ csrfField() }}
                 <div class="row w-100 py-3 g-4">
                   <div class="mb-1">
                     <label for="title" class="form-label">عنوان موقعیت شغلی</label>
-                    <input name="title" class="form-control form-control-lg" id="title" placeholder="مثال: کارآموز طراح وب">
+                    <input value="{{position ? position.title : ''}}" name="title" class="form-control form-control-lg" id="title" placeholder="مثال: کارآموز طراح وب">
                   </div>
                   <div class="mb-1">
                     <label for="description" class="form-label">شرح موقعیت شغلی</label>
-                    <textarea name="description" class="form-control" id="description" rows="3"></textarea>
+                    <textarea name="description" class="form-control" id="description" rows="3">{{position ? position.description : ''}}</textarea>
                   </div>
 
                   <div class="mb-1">
                     <p class="form-label">جنسیت</p>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" value="1" name="sex" id="both" checked>
+                      <input class="form-check-input" type="radio" value="1" name="sex" id="both" {{position ? (position.sex == 1 ? 'checked' : '') : 'checked'}}>
                       <label class="form-check-label" for="both">
                         خانم و آقا
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" value="2" name="sex" id="male">
+                      <input class="form-check-input" type="radio" value="2" name="sex" id="male" {{position && position.sex == 2 ? 'checked' : ''}}>
                       <label class="form-check-label" for="male">
                         آقا
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" value="3" name="sex" id="female">
+                      <input class="form-check-input" type="radio" value="3" name="sex" id="female" {{position && position.sex == 3 ? 'checked' : ''}}>
                       <label class="form-check-label" for="female">
                         خانم
                       </label>
@@ -58,7 +64,7 @@
                     <p class="form-label">نوع قرارداد</p>
                     @each(type in types)
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" value={{type.id}} name="type" id="type{{type.id}}">
+                        <input class="form-check-input" type="radio" value={{type.id}} name="type" id="type{{type.id}}" {{position && position.type == type.id ? 'checked' : ''}}>
                         <label class="form-check-label" for="type{{type.id}}">
                           {{type.name}}
                         </label>
@@ -70,7 +76,7 @@
                     <p class="form-label">دسته‌بندی</p>
                     @each(category in categories)
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" value={{category.id}} name="category" id="category{{category.id}}">
+                        <input class="form-check-input" type="radio" value={{category.id}} name="categoryId" id="category{{category.id}}" {{position && position.categoryId == category.id ? 'checked' : ''}}>
                         <label class="form-check-label" for="category{{category.id}}">
                           {{category.name}}
                         </label>
@@ -80,7 +86,7 @@
 
 
                   <div class="col-lg-4 nav_btn gradiant d-lg-flex align-items-center justify-content-center order-last text-center">
-                    <button type="submit" class="btn f-14 d-block w-100 btn_shadow text-white">ثبت موقعیت شغلی</button>
+                    <button type="submit" class="btn f-14 d-block w-100 btn_shadow text-white">{{request.params().id !== "new" ? 'بروزرسانی' : 'ثبت موقعیت شغلی'}}</button>
                   </div>
                   
                 </div>

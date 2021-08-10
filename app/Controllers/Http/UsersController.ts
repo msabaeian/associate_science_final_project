@@ -23,6 +23,7 @@ export default class UsersController {
             schema: validationSchema
         }) 
 
+        console.log(validate)
         let image = ''
         if(validate.image){
             image = await uploadToLiaraBucket(validate.image)

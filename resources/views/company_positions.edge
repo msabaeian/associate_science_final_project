@@ -13,7 +13,7 @@
                 <p class="fw-light mt-3">کارجویان ممکن است برای شرکت های مختلفی درخواست ارسال کنند، در صورتی که کارجو را مناسب موقعیت خود دیدید سریعا با آنها هماهنگ کنید. سیستم کارباما هیچگونه مسيولیتی در قبال آزاد بودن درخواست کنندگان ندارد.</p>
                 <p>شما {{positions.filter(a => !a.studentId).length}} موقعیت شغلی باز دارید.</p>
                 <div class="gradiant text-center px-0 w-100 mt-4 py-1 btn_shadow">
-                  <a class="btn text-white text-center px-xl-3 f-13" href="{{route('CompaniesController.createShow')}}" role="button">افزودن موقعیت شغلی</a>
+                  <a class="btn text-white text-center px-xl-3 f-13" href="{{route('CompaniesController.createShow', {id: 'new'})}}" role="button">افزودن موقعیت شغلی</a>
                 </div>
               </div>
             </aside>

@@ -17,8 +17,7 @@
           <!-- end aside section -->
           <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
             <div>
-              @include('partials/error')
-              @include('partials/success')
+              @include('partials/messages')
               <form action="{{ route('UsersController.update') }}" method="POST" enctype="multipart/form-data">
                 {{ csrfField() }}
                 <div class="row w-100 py-3 g-4">
@@ -40,7 +39,7 @@
 
                   <div class="mb-3">
                     <label for="formFile" class="form-label">انتخاب تصویر</label>
-                    <input class="form-control" type="file" id="formFile" accept="image/png,image/jpg,image/jpeg">
+                    <input name="image" class="form-control" type="file" id="formFile" accept="image/png,image/jpg,image/jpeg">
                   </div>
 
                   @if(auth.user.role === 3)

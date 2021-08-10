@@ -15,16 +15,20 @@
                   تماس گرفته و پس از توافقات لازم درخواست آنهارا تایید کنید، بدیهی است اگر یک کارجو در شرکت دیگری تایید شد از لیست شما حذف میشود.
                 </p>
 
-                <div class="gradiant text-center px-0 w-100 mt-4 py-1 btn_shadow">
-                  <a class="btn text-white text-center px-xl-3 f-13 d-block" href="#" role="button"> بستن این موقعیت </a>
+                <div class="gradiant text-center px-0 w-100 mt-3 py-1 btn_shadow">
+                  <a class="btn text-white text-center px-xl-3 f-13 d-block" href="{{route('CompaniesController.createShow', {id: request.params().id})}}" role="button">ویرایش</a>
                 </div>
+
+                <div class="gradiant dark text-center px-0 w-100 mt-3 py-1 btn_shadow">
+                  <a class="btn text-white text-center px-xl-3 f-13 d-block" href="{{route('CompaniesController.all')}}" role="button">بازگشت</a>
+                </div>
+                
               </div>
             </aside>
           </section>
           <!-- end aside section -->
           <section class="col-lg-8 col-11 mx-auto p-md-3 p-0 order-first order-lg-last">
-            @include('partials/success')
-            @include('partials/error')
+            @include('partials/messages')
             <div>
               @if(position.studentId)
                 <p>کارجوی انتخاب شده</p>
