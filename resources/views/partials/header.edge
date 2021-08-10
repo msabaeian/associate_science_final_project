@@ -21,7 +21,9 @@
             @if(auth.isLoggedIn)
               <li class="nav-item px-3 ps-lg-5">
                 <a class="nav-link fw-bold" href="{{route('UsersController.index')}}">
-                  <img src="{{auth.user.image}}" class="avatar" />
+                  @if(auth.user.image) 
+                    <img src="{{auth.user.image}}" class="avatar" />
+                  @end
                   @if(auth.user.role === 2)
                     {{auth.user.name}} عزیز
                   @else
@@ -34,9 +36,13 @@
                 <li class="nav-item px-3">
                   <a class="nav-link" href="/usercp">درخواست های شما</a>
                 </li>
-              @else
+              @elseif(auth.user.role === 3)
                 <li class="nav-item px-3">
                   <a class="nav-link" href="/company/positions">فرصت‌های شغلی شما</a>
+                </li>
+              @else
+                <li class="nav-item px-3">
+                  <a class="nav-link" href="{{route('AdminController.index')}}">بخش مدیریت</a>
                 </li>
               @end
               

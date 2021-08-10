@@ -64,6 +64,9 @@ footer {
 .min-80 {
   min-height: 80vh;
 }
+.min-50 {
+  min-height: 50vh;
+}
 .btn_shadow {
   transition: all 0.3s;
 }
@@ -466,4 +469,27 @@ img {
   display: flex;
   justify-content: center;
   align-self: center;
+}
+
+.admin-btn {
+  height: 240px;
+  border-radius: 24px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-btn p {
+  font-size: 22pt;
+}
+
+.admin-btn.stats {
+  background-image: linear-gradient(to top, #0ba360 0%, #3cba92 100%);
+}
+.admin-btn.categories {
+  background-image: linear-gradient(to top, #5f72bd 0%, #9b23ea 100%);
+}
+.admin-btn.types {
+  background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
 }

@@ -52,3 +52,14 @@ Route.group(() => {
   Route.post('/position/:id', 'CompaniesController.selectStudent')
   
 }).prefix('/company').middleware('auth')
+
+Route.group(() => {
+  Route.get('/', 'AdminController.index')
+  Route.get('/categories', 'AdminController.categoryList')
+  Route.get('/category/:id', 'AdminController.categoryShow')
+  Route.post('/category/:id', 'AdminController.categoryStore')
+  Route.get('/types', 'AdminController.typeList')
+  Route.get('/types/:id', 'AdminController.typeShow')
+  Route.post('/types/create', 'AdminController.typeStore')
+  Route.post('/stats', 'AdminController.stats')
+}).prefix('/admin').middleware('auth').middleware('admin')

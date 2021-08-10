@@ -2,7 +2,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Position from 'App/Models/Position'
 import PositionType from 'App/Models/PositionType'
 import User from 'App/Models/User'
-import {schema,rules} from '@ioc:Adonis/Core/Validator'
+import {schema} from '@ioc:Adonis/Core/Validator'
 
 export default class CompaniesController {
     public async all(ctx: HttpContextContract){

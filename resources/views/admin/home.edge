@@ -1,0 +1,18 @@
+@layout('layouts/default')
+@set('title', 'پروفایل')
+
+@section('body')
+<div>
+  <div class="container d-flex flex-column flex-lg-row justify-content-between min-80">
+    <a href="{{route('AdminController.categoryList')}}" class="admin-btn stats col-lg-3 col-12 mb-3 mb-lg-0 text-decoration-none text-white">
+      <p>دسته‌های شغلی</p>
+    </a>
+    <a href="{{route('AdminController.typeList')}}" class="admin-btn categories col-lg-3 col-12 mb-3 mb-lg-0 text-decoration-none text-white">
+      <p>نوع قرارداد‌ها</p>
+    </a>
+    <a href="{{route('AdminController.stats')}}" class="admin-btn types col-lg-3 col-12 mb-3 mb-lg-0 text-decoration-none text-white">
+      <p>آمار</p>
+    </a>
+  </div>
+</div>
+@end
