@@ -1,11 +1,12 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Apply from 'App/Models/Apply'
 import Position from 'App/Models/Position'
+import PositionCategory from 'App/Models/PositionCategory'
 import PositionType from 'App/Models/PositionType'
 
 export default class PositionsController {
     public async all(ctx: HttpContextContract){
-        const {page = 1,search = '',type = '',sex = ''} = ctx.request.qs()
+        const {page = 1,search = '',type = '',sex = '', category = ''} = ctx.request.qs()
         const positions = Position.query().preload("company").whereNull("studentId")
         if(search){
             positions.where('title', 'like', `%${search}%`)
@@ -16,8 +17,12 @@ export default class PositionsController {
         if(sex){
             positions.where('sex', sex)
         }
+        if(category){
+            positions.where('categoryId', category)
+        }
         const types = await PositionType.all()
-        return ctx.view.render('position_list', {positions: await positions.paginate(page, 5), types})
+        const categories = await PositionCategory.all()
+        return ctx.view.render('position_list', {positions: await positions.paginate(page, 4), types, categories})
     }
 
     public async index(ctx: HttpContextContract){

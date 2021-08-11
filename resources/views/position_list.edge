@@ -5,6 +5,7 @@
 @set('search', request.qs().search || '')
 @set('sex', request.qs().sex || '')
 @set('selectedType', request.qs().type || '')
+@set('selectedCategory', request.qs().category || '')
 <!-- start main section --><!-- start main section -->
 <div class="mb-5">
   <div class="container min-80">
@@ -59,6 +60,24 @@
                 </div>
               @endeach
 
+              <h6 class="mb-3 mt-4">دسته بندی</h6>
+              <div class="fw-light hos">
+                <label for="all_category" class="radio_btn my-2 py-1">
+                  <input value="" type="radio" name="category" id="all_category" class="radio_input" {{!selectedCategory && 'checked'}} />
+                  <div class="radio_radio d-inline-block me-2"></div>
+                  نمایش همه
+                </label>
+              </div>
+              @each(category in categories)
+                <div class="fw-light radio_div">
+                  <label for="category-{{category.id}}" class="radio_btn my-2 py-1">
+                    <input value="{{category.id}}" type="radio" name="category" id="category-{{category.id}}" class="radio_input" {{selectedCategory == category.id && 'checked'}} />
+                    <div class="radio_radio d-inline-block me-2"></div>
+                    {{category.name}}
+                  </label>
+                </div>
+              @endeach
+
               <div class="w-75">
                 <div class="gradiant text-center px-0 w-50 mt-4 py-1 btn_shadow">
                   <button class="btn text-white text-center px-xl-3" href="#" role="button">اعمال</button>
@@ -68,9 +87,9 @@
           </form>
         </aside>
         <!-- advertise -->
-        <div class="mt-5 w-100">
+        {{--  <div class="mt-5 w-100">
           <img src="./images/resume.webp" alt="" class="w-100" />
-        </div>
+        </div>  --}}
         <!-- end advertise -->
       </section>
       <!-- end aside section -->
