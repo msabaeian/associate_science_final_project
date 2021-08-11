@@ -37,7 +37,7 @@ Route.get('/positions', 'PositionsController.all')
 Route.get('/position/:id', 'PositionsController.index')
 Route.post('/position/:id', 'PositionsController.apply').middleware('auth')
 
-Route.get('/about', 'PositionsController.index')
+Route.get('/about', 'PagesController.about')
 
 Route.get('/usercp', 'PositionsController.studentAppliedPositions').middleware('auth')
 Route.get('/profile', 'UsersController.index').middleware('auth')
