@@ -51,7 +51,7 @@ Route.group(() => {
   Route.get('/position/:id', 'CompaniesController.index')
   Route.post('/position/:id/selectStudent', 'CompaniesController.selectStudent')
   
-}).prefix('/company').middleware('auth')
+}).prefix('/company').middleware('auth').middleware('company')
 
 Route.group(() => {
   Route.get('/', 'AdminController.index')

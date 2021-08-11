@@ -23,6 +23,7 @@
         خانم
         @end
       </p>
+      <p>تاریخ ثبت: {{date}}</p>
 
       @if(!isYours && !appliedBefore && auth.isLoggedIn)
         <form action="{{route('PositionsController.apply', {id: position.id})}}" method="POST">

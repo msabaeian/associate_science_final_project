@@ -3,7 +3,7 @@ import Apply from 'App/Models/Apply'
 import Position from 'App/Models/Position'
 import PositionCategory from 'App/Models/PositionCategory'
 import PositionType from 'App/Models/PositionType'
-
+import moment from 'jalali-moment'
 export default class PositionsController {
     public async all(ctx: HttpContextContract){
         const {page = 1,search = '',type = '',sex = '', category = ''} = ctx.request.qs()
@@ -32,8 +32,9 @@ export default class PositionsController {
             return ctx.response.redirect('/')
         }
         const apply = await Apply.query().where('positionId',id).andWhere('studentId',ctx.auth.user?.id || '').first()
+        const date = moment(position.createdAt).format("jYYYY/jMM/jDD")
         
-        return ctx.view.render('position', {position, appliedBefore: !!apply, isYours:position?.companyId === ctx.auth.user?.id})
+        return ctx.view.render('position', {position, appliedBefore: !!apply, isYours:position?.companyId === ctx.auth.user?.id,date})
     }
     
     public async apply(ctx: HttpContextContract){
