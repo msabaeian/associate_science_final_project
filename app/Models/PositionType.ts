@@ -16,7 +16,7 @@ export default class PositionType extends BaseModel {
   public updatedAt: DateTime
 
   @hasMany(() => Position, {
-    foreignKey: 'id'
+    foreignKey: 'type'
   })
   public positions: HasMany<typeof Position>
 }

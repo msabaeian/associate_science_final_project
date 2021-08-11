@@ -10,7 +10,7 @@ export default class PositionCategory extends BaseModel {
   public name: string
 
   @hasMany(() => Position, {
-    foreignKey: 'id'
+    foreignKey: 'categoryId'
   })
   public positions: HasMany<typeof Position>
 
